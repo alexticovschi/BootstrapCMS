@@ -18,7 +18,30 @@
                         </h1>
                         
                         <div class="col-xs-6">
-                            <form action="">
+
+                            <?php  
+                            // check if the user has submitted some value and store the value in the $cat_title variable 
+                            // if the input field is empty, inform the user, else insert the value into categories table
+                            // and then check if the query was successful; if it wasn't, kill the script and display the error
+                            if(isset($_POST['submit'])) {
+                                $cat_title = $_POST['cat_title'];
+
+                                if(trim($cat_title == "") || empty($cat_title)) {
+                                    echo "This field should not be empty";
+                                } else {
+                                    $query = "INSERT INTO categories (cat_title) VALUES ('{$cat_title}')";
+
+                                    $category_query = mysqli_query($connection, $query);
+
+                                    if(!$category_query) {
+                                        die('Query Failed: ' . mysqli_error($connection));
+                                    }
+                                }
+                            }
+
+                            ?>
+
+                            <form action="" method="post">
                                 <div class="form-group">
                                     <label for="cat-title">Add Category</label>
                                     <input class="form-control" type="text" name="cat_title"> 
@@ -47,7 +70,7 @@
                                 <tbody>
                                     
                                     <?php 
-                                    
+
                                     while($row = mysqli_fetch_assoc($select_categories)) {
                                         $cat_id = $row['cat_id'];                               
                                         $cat_title = $row['cat_title'];
