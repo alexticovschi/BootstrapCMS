@@ -1,3 +1,7 @@
+<?php 
+    // buffers request in the headers of the scripts
+    ob_start(); 
+?> 
 <?php include("../includes/db.php"); ?>
 
 <!DOCTYPE html>

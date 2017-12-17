@@ -53,23 +53,21 @@
                         </div>
 
                         <div class="col-xs-6">
-                            <?php
-
-                            $query = "SELECT * FROM categories";
-                            $select_categories = mysqli_query($connection, $query);
-
-                            ?>
 
                             <table class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
                                         <th>Id</th>
                                         <th>Category Title</th>
+                                        <th>Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     
-                                    <?php 
+                                    <?php  // FIND ALL CATEGORIES
+
+                                    $query = "SELECT * FROM categories";
+                                    $select_categories = mysqli_query($connection, $query);
 
                                     while($row = mysqli_fetch_assoc($select_categories)) {
                                         $cat_id = $row['cat_id'];                               
@@ -78,8 +76,22 @@
                                         echo "<tr>";
                                             echo "<td>{$cat_id}</td>";
                                             echo "<td>{$cat_title}</td>";
+                                            echo "<td><a href='categories.php?delete={$cat_id}'>Delete</a></td>"; 
                                         echo "</tr>";
 
+                                    }
+
+                                    ?>
+                                    
+                                    <?php // DELETE CATEGORIES 
+                                    // if there is a delele key in the url, and its value is identical with ...
+                                    // the id from the categories table, delete that category
+                                    // then refresh the page
+                                    if(isset($_GET['delete'])) {
+                                        $the_cat_id = $_GET['delete'];
+                                        $query = "DELETE FROM categories WHERE cat_id = '{$the_cat_id}' ";
+                                        $delete_query = mysqli_query($connection, $query);
+                                        header("Location: categories.php"); 
                                     }
 
                                     ?>
