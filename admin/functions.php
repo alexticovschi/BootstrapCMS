@@ -1,5 +1,15 @@
 <?php
 
+// CHECK IF THE QUERY FAILED OR NOT
+function confirm_query($result) {
+    global $connection;
+
+    if(!$result) {
+        die('Query Failed: ' . mysqli_error($connection));
+    }
+}
+
+
 // INCLUDE update_categories.php FILE
 function include_update_categories_file() {
 	global $connection;
@@ -27,7 +37,7 @@ function find_all_categories() {
             echo "<td>{$cat_title}</td>";
             echo "<td><a href='categories.php?edit={$cat_id}'>Edit</a></td>"; 
             echo "<td><a href='categories.php?delete={$cat_id}'>Delete</a></td>"; 
-    
+        echo "</tr>";
     }	
 }
 
@@ -80,9 +90,7 @@ function insert_categories() {
 
             $category_query = mysqli_query($connection, $query);
 
-            if(!$category_query) {
-                die('Query Failed: ' . mysqli_error($connection));
-            }
+            confirm_query($category_query);
         }
     }	
 }
@@ -102,8 +110,7 @@ function update_caterories() {
         $edit_categories = mysqli_query($connection, $query);
 
         $row = mysqli_fetch_assoc($edit_categories);
-        $cat_title = $row['cat_title'];
-                                
+        $cat_title = $row['cat_title'];                              
     }
 
     // UPDATE QUERY
@@ -111,6 +118,9 @@ function update_caterories() {
         $the_cat_title = $_POST['cat_title'];
         $query = "UPDATE categories SET cat_title = '{$the_cat_title}' WHERE cat_id='{$cat_id}' ";
         $edit_query = mysqli_query($connection, $query);
+
+        confirm_query($edit_query);
+
         header("Location: categories.php"); 
     } 
 
@@ -128,33 +138,50 @@ function delete_categories() {
         $the_cat_id = $_GET['delete'];
         $query = "DELETE FROM categories WHERE cat_id = '{$the_cat_id}' ";
         $delete_query = mysqli_query($connection, $query);
+
+        confirm_query($delete_query);
+
         header("Location: categories.php"); 
     }	
 }
 
 
+// CREATE POST - INSERT POST INTO posts TABLE
 
+function create_post() {
+    global $connection;
 
+    if(isset($_POST['create_post'])) {
 
+        $post_category_id = $_POST['post_category_id'];
+        $post_author = $_POST['post_author']; 
+        $post_title = $_POST['post_title'];                                   
+        $post_status = $_POST['post_status'];  
 
+        $post_image = $_FILES['image']['name']; 
+        $post_image_temp = $_FILES['image']['tmp_name']; 
 
+        $post_tags = $_POST['post_tags'];  
+        $post_content = $_POST['post_content'];  
+        $post_comment_count = 4; 
+        $post_date = date('d-m-y');
 
+        move_uploaded_file($post_image_temp, "../images/$post_image");
 
+        $query = "INSERT INTO posts ";
+        $query .= "(post_category_id, post_title, post_author, post_date, post_image, ";
+        $query .= "post_content, post_tags, post_comment_count, post_status) ";
+        $query .= "VALUES(";
+        $query .= "$post_category_id, '$post_title', '$post_author', now(), '$post_image' ";
+        $query .= "'$post_content', '$post_tags', $post_comment_count, '$post_status'";
+        $query .= ")";
 
+        $insert_query = mysqli_query($connection, $query);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+        confirm_query($insert_query);
+        
+    }
+}
 
 
 
