@@ -20,7 +20,46 @@ if(isset($_GET['p_id'])) {
         $post_content = $row['post_content'];
     }
 
+
+    if(isset($_POST['update_post'])) {
+        $post_author = $_POST['post_author']; 
+        $post_title = $_POST['post_title'];                                   
+        $post_category_id = $_POST['post_category'];  
+        $post_status = $_POST['post_status'];  
+        $post_image = $_FILES['image']['name'];  
+        $post_image_temp = $_FILES['image']['tmp_name'];  
+        $post_content = $_POST['post_content'];        
+        $post_tags = $_POST['post_tags'];  
+
+        move_uploaded_file($post_image_temp, "../images/$post_image");
+
+        if(empty($post_image)) {
+            $query = "SELECT * FROM posts WHERE post_id = $post_id";
+            $select_image = mysqli_query($connection, $query);
+
+            $row = mysqli_fetch_assoc($select_image);
+            $post_image = $row['post_image'];
+        }
+
+        $query  = "UPDATE posts SET ";
+        $query .= "post_author = '$post_author', ";
+        $query .= "post_title = '$post_title', ";
+        $query .= "post_category_id = '$post_category_id', ";
+        $query .= "post_date = now(), ";
+        $query .= "post_status = '$post_status', ";
+        $query .= "post_tags = '$post_tags', ";
+        $query .= "post_content = '$post_content', ";
+        $query .= "post_image = '$post_image' ";
+        $query .= "WHERE post_id = $post_id ";
+
+        $update_post = mysqli_query($connection, $query);
+
+        confirm_query($update_post);
+
+    }
+
 }
+
 
 
 ?>
@@ -36,7 +75,7 @@ if(isset($_GET['p_id'])) {
     <div class ="form-group">
         <label for ="post_category">Post Category</label>
         <br>
-        <select name="" id="">
+        <select name="post_category" id="">
             
             <?php
 
@@ -49,14 +88,14 @@ if(isset($_GET['p_id'])) {
                     $cat_id = $row['cat_id']; 
                     $cat_title = $row['cat_title']; 
 
-                    echo "<option value=''>{$cat_title}</option>";
+                    echo "<option value='$cat_id'>{$cat_title}</option>";
 
                 }
                 
 
 
             ?>
-            
+
         </select>
     </div>
 
@@ -89,7 +128,7 @@ if(isset($_GET['p_id'])) {
     </div>
 
     <div class="form-group">
-        <input class="btn btn-primary" type="submit" name="create_post" value="Update Post">
+        <input class="btn btn-primary" type="submit" name="update_post" value="Update Post">
     </div>
 
 </form>
