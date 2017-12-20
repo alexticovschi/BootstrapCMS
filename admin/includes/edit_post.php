@@ -39,7 +39,7 @@ if(isset($_GET['p_id'])) {
 
             $row = mysqli_fetch_assoc($select_image);
             $post_image = $row['post_image'];
-        }
+        } 
 
         $query  = "UPDATE posts SET ";
         $query .= "post_author = '$post_author', ";
