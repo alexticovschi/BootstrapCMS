@@ -1,3 +1,4 @@
+
 <table class="table table-hover table-bordered">
     <thead>
         <tr>
@@ -16,3 +17,6 @@
         <?php find_all_posts(); ?>
     </tbody>
 </table>
+
+
+<?php delete_post(); ?>

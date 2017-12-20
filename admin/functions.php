@@ -28,6 +28,8 @@ function find_all_categories() {
     $query = "SELECT * FROM categories";
     $select_categories = mysqli_query($connection, $query);
 
+    confirm_query($select_categories);
+
     while($row = mysqli_fetch_assoc($select_categories)) {
         $cat_id = $row['cat_id'];  
         $cat_title = $row['cat_title'];                               
@@ -47,6 +49,8 @@ function find_all_posts() {
 
     $query = "SELECT * FROM posts";
     $select_posts = mysqli_query($connection, $query);
+
+    confirm_query($select_posts);
 
     while($row = mysqli_fetch_assoc($select_posts)) {
         $post_id = $row['post_id']; 
@@ -68,7 +72,8 @@ function find_all_posts() {
             echo "<td><img width='110' class='img-responsive' src='../images/$post_image'></td>";
             echo "<td>$post_tags</td>";
             echo "<td>$post_comment_count</td>";
-            echo "<td>$post_date</td>";                                      
+            echo "<td>$post_date</td>";   
+            echo "<td><a href='posts.php?delete=$post_id'>Delete</a></td>";                                                                    
         echo "</tr>";
     }    
 }
@@ -147,7 +152,6 @@ function delete_categories() {
 
 
 // CREATE POST - INSERT POST INTO posts TABLE
-
 function create_post() {
     global $connection;
 
@@ -172,7 +176,7 @@ function create_post() {
         $query .= "(post_category_id, post_title, post_author, post_date, post_image, ";
         $query .= "post_content, post_tags, post_comment_count, post_status) ";
         $query .= "VALUES(";
-        $query .= "$post_category_id, '$post_title', '$post_author', now(), '$post_image' ";
+        $query .= "$post_category_id, '$post_title', '$post_author', now(), '$post_image', ";
         $query .= "'$post_content', '$post_tags', $post_comment_count, '$post_status'";
         $query .= ")";
 
@@ -184,6 +188,24 @@ function create_post() {
 }
 
 
+
+// DELETE POST FROM posts TABLE
+function delete_post() {
+    global $connection;
+
+    if(isset($_GET['delete'])) {
+        $post_id = $_GET['delete'];
+
+        $query = "DELETE FROM posts WHERE post_id=$post_id";
+        $delete_query = mysqli_query($connection, $query);
+
+        confirm_query($delete_query);
+
+        header("Location: posts.php");
+
+    }
+
+}
 
 
 ?>
