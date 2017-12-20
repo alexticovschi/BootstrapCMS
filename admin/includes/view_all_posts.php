@@ -11,6 +11,9 @@
             <th>Tags</th>
             <th>Comments</th>
             <th>Date</th>
+            <th>Delete</th>
+            <th>Edit</th>
+
         </tr>
     </thead>
     <tbody>
@@ -18,5 +21,11 @@
     </tbody>
 </table>
 
-
 <?php delete_post(); ?>
+
+
+
+
+
+
+
