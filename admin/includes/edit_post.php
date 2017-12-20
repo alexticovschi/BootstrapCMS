@@ -37,7 +37,26 @@ if(isset($_GET['p_id'])) {
         <label for ="post_category">Post Category</label>
         <br>
         <select name="" id="">
+            
+            <?php
 
+                $query = "SELECT * FROM categories";
+                $select_categories = mysqli_query($connection, $query);
+                
+                confirm_query($select_categories);
+
+                while($row = mysqli_fetch_assoc($select_categories)) {
+                    $cat_id = $row['cat_id']; 
+                    $cat_title = $row['cat_title']; 
+
+                    echo "<option value=''>{$cat_title}</option>";
+
+                }
+                
+
+
+            ?>
+            
         </select>
     </div>
 
