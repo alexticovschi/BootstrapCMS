@@ -43,6 +43,8 @@ function find_all_categories() {
     }	
 }
 
+
+
 // FIND ALL POSTS FROM posts TABLE AND DISPLAY THE CONTENT
 function find_all_posts() {
     global $connection;
@@ -67,7 +69,17 @@ function find_all_posts() {
             echo "<td>$post_id</td>";
             echo "<td>$post_author</td>";
             echo "<td>$post_title</td>";
-            echo "<td>$post_category_id</td>";
+
+
+            // Relate the category(from the catagories table) to post_category_id(from the posts table) and display the title
+            $query = "SELECT cat_id, cat_title FROM categories WHERE cat_id='{$post_category_id}' ";
+            $select_category = mysqli_query($connection, $query);
+            $row = mysqli_fetch_assoc($select_category);   
+            $cat_title = $row['cat_title']; 
+            echo "<td>$cat_title</td>";
+
+
+
             echo "<td>$post_status</td>";
             echo "<td><img width='110' class='img-responsive' src='../images/$post_image'></td>";
             echo "<td>$post_tags</td>";
