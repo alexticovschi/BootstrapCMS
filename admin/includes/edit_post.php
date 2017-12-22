@@ -23,12 +23,13 @@ if(isset($_GET['p_id'])) {
 
     if(isset($_POST['update_post'])) {
         $post_author = $_POST['post_author']; 
-        $post_title = $_POST['post_title'];                                   
+        $post_title = $_POST['post_title']; 
+        $post_title = mysqli_real_escape_string($connection, $post_title);
         $post_category_id = $_POST['post_category'];  
         $post_status = $_POST['post_status'];  
         $post_image = $_FILES['image']['name'];  
         $post_image_temp = $_FILES['image']['tmp_name'];  
-        $post_content = $_POST['post_content'];        
+        $post_content = mysqli_real_escape_string($connection, $_POST['post_content']);        
         $post_tags = $_POST['post_tags'];  
 
         move_uploaded_file($post_image_temp, "../images/$post_image");
@@ -69,7 +70,7 @@ if(isset($_GET['p_id'])) {
 
     <div class ="form-group">
         <label for ="title">Post Title</label>
-        <input value="<?php echo $post_title; ?>" type="text" class="form-control" name="post_title">
+        <input value="<?php echo stripslashes($post_title); ?>" type="text" class="form-control" name="post_title">
     </div>
 
     <div class ="form-group">
