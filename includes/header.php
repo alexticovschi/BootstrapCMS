@@ -2,6 +2,7 @@
     header('Content-Type: text/html; charset=ISO-8859-1');
 ?>
 <?php include("db.php"); ?>
+<?php include("admin/functions.php"); ?>
 
 <!DOCTYPE html>
 <html lang="en">
