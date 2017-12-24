@@ -44,6 +44,40 @@ function find_all_categories() {
 }
 
 
+// FIND ALL POSTS FROM posts TABLE AND DISPLAY THE CONTENT
+function find_all_comments() {
+    global $connection;
+
+    $query = "SELECT * FROM comments";
+    $select_comments = mysqli_query($connection, $query);
+
+    confirm_query($select_comments);
+
+    while($row = mysqli_fetch_assoc($select_comments)) {
+        $comment_id = $row['comment_id']; 
+        $comment_post_id = $row['comment_post_id']; 
+        $comment_author = $row['comment_author'];
+        $comment_email = $row['comment_email']; 
+        $comment_content = $row['comment_content']; 
+        $comment_status = $row['comment_status']; 
+        $comment_date = $row['comment_date']; 
+
+        echo "<tr>";
+            echo "<td>$comment_id</td>";
+            echo "<td>$comment_author</td>";
+            echo "<td>$comment_content</td>";
+            echo "<td>$comment_email</td>"; 
+            echo "<td>$comment_status</td>";
+            echo "<td>Some text</td>";
+            echo "<td>$comment_date</td>";  
+            echo "<td><a href=''>Approve</a></td>";
+            echo "<td><a href=''>Unapprove</a></td>";
+            echo "<td><a href=''>Delete</a></td>";                                                        
+        echo "</tr>";
+    }    
+}
+
+
 
 // FIND ALL POSTS FROM posts TABLE AND DISPLAY THE CONTENT
 function find_all_posts() {
