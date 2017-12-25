@@ -19,6 +19,16 @@
     </tbody>
 </table>
 
+<?php 
+
+unapprove_comment();
+
+approve_comment();  
+
+?>
+
+
+
 <?php delete_comment(); ?>
 
 

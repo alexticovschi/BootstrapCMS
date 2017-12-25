@@ -84,8 +84,8 @@ function find_all_comments() {
 
                 
             echo "<td>$comment_date</td>";  
-            echo "<td><a href=''>Approve</a></td>";
-            echo "<td><a href=''>Unapprove</a></td>";
+            echo "<td><a href='comments.php?approve=$comment_id'>Approve</a></td>";
+            echo "<td><a href='comments.php?unapprove=$comment_id'>Unapprove</a></td>";
             echo "<td><a href='comments.php?delete=$comment_id'>Delete</a></td>";                                                        
         echo "</tr>";
     }     
@@ -110,6 +110,38 @@ function delete_comment() {
 
 }
 
+// UNAPPROVE COMMENT
+function unapprove_comment() {
+    global $connection;
+
+    if(isset($_GET['unapprove'])) {
+        $comment_status = $_GET['unapprove'];
+
+        $query = "UPDATE comments SET comment_status = 'unapproved' WHERE comment_id = $comment_status ";
+        $update_comment_status = mysqli_query($connection, $query);
+
+        confirm_query($update_comment_status);
+
+        header("Location: comments.php");
+    }    
+}
+
+
+// APPROVE COMMENT
+function approve_comment() {
+    global $connection;
+
+    if(isset($_GET['approve'])) {
+        $comment_status = $_GET['approve'];
+
+        $query = "UPDATE comments SET comment_status = 'approve' WHERE comment_id = $comment_status ";
+        $update_comment_status = mysqli_query($connection, $query);
+
+        confirm_query($update_comment_status);
+
+        header("Location: comments.php");
+    }      
+}
 
 
 // FIND ALL POSTS FROM posts TABLE AND DISPLAY THE CONTENT
