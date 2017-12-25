@@ -14,8 +14,12 @@
                 
                 <?php
 
-                $query = "SELECT * FROM posts";
+                $query = "SELECT * FROM posts WHERE post_status = 'published' ";
                 $posts_query = mysqli_query($connection, $query);
+
+                if (mysqli_num_rows($posts_query) == 0) {
+                    echo "<h3 style='padding: 100px; text-align: center; border: 2px solid grey; '> No Posts</h3>";
+                }
 
                 while($row = mysqli_fetch_assoc($posts_query)) {
                     $post_id = $row['post_id'];
@@ -24,6 +28,7 @@
                     $post_content = substr($row['post_content'], 0, 105) . '...';
                     $post_date = $row['post_date'];
                     $post_image = $row['post_image'];
+                    $post_status = $row['post_status'];
 
                 ?>    
 
