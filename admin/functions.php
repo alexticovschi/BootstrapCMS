@@ -134,7 +134,7 @@ function approve_comment() {
     if(isset($_GET['approve'])) {
         $comment_status = $_GET['approve'];
 
-        $query = "UPDATE comments SET comment_status = 'approve' WHERE comment_id = $comment_status ";
+        $query = "UPDATE comments SET comment_status = 'approved' WHERE comment_id = $comment_status ";
         $update_comment_status = mysqli_query($connection, $query);
 
         confirm_query($update_comment_status);
