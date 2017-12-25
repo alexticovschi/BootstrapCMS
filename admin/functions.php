@@ -280,14 +280,14 @@ function create_post() {
 
         $post_tags = $_POST['post_tags'];  
         $post_content = $_POST['post_content'];  
-        $post_comment_count = 4; 
+        // $post_comment_count = 4; 
         $post_date = date('d-m-y');
 
         move_uploaded_file($post_image_temp, "../images/$post_image");
 
         $query = "INSERT INTO posts ";
         $query .= "(post_category_id, post_title, post_author, post_date, post_image, ";
-        $query .= "post_content, post_tags, post_comment_count, post_status) ";
+        $query .= "post_content, post_tags, post_status) ";
         $query .= "VALUES(";
         $query .= "$post_category_id, '$post_title', '$post_author', now(), '$post_image', ";
         $query .= "'$post_content', '$post_tags', $post_comment_count, '$post_status'";
