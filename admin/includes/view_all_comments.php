@@ -19,7 +19,7 @@
     </tbody>
 </table>
 
-<?php delete_post(); ?>
+<?php delete_comment(); ?>
 
 
 

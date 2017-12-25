@@ -86,9 +86,28 @@ function find_all_comments() {
             echo "<td>$comment_date</td>";  
             echo "<td><a href=''>Approve</a></td>";
             echo "<td><a href=''>Unapprove</a></td>";
-            echo "<td><a href=''>Delete</a></td>";                                                        
+            echo "<td><a href='comments.php?delete=$comment_id'>Delete</a></td>";                                                        
         echo "</tr>";
     }     
+}
+
+
+// DELETE COMMENT FROM comments TABLE
+function delete_comment() {
+    global $connection;
+
+    if(isset($_GET['delete'])) {
+        $comment_id = $_GET['delete'];
+
+        $query = "DELETE FROM comments WHERE comment_id=$comment_id";
+        $delete_comment = mysqli_query($connection, $query);
+
+        confirm_query($delete_comment);
+
+        header("Location: comments.php");
+
+    }
+
 }
 
 
@@ -268,6 +287,7 @@ function delete_post() {
     }
 
 }
+
 
 
 ?>
