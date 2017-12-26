@@ -8,6 +8,8 @@
             <th>Lastname</th>
             <th>Email</th>
             <th>Role</th>
+            <th>Admin</th>
+            <th>Subscriber</th>
             <th>Edit</th>
             <th>Delete</th>
         </tr>
@@ -40,11 +42,12 @@
             echo "<td>$user_email</td>";   
             echo "<td>$user_role</td>";  
             // echo "<td>$user_date</td>";
+            echo "<td><a href='users.php?admin=$user_id'>Admin</a></td>";
+            echo "<td><a href='users.php?subscriber=$user_id'>Subscriber</a></td>";
             echo "<td><a href='users.php?edit=$user_id'>Edit</a></td>";
             echo "<td><a href='users.php?delete=$user_id'>Delete</a></td>";                                                        
         echo "</tr>";
     } 
-
 
     ?>
 
@@ -64,11 +67,38 @@
         header("Location: users.php");
     }
 
-
-
     ?>
 
 
+
+    <?php 
+
+    if(isset($_GET['admin'])) {
+        $this_user_id = $_GET['admin'];
+
+        $query = "UPDATE users SET user_role = 'admin' WHERE user_id = $this_user_id ";
+
+        $update_user_role = mysqli_query($connection, $query);
+
+        confirm_query($update_user_role);
+
+        header("Location: users.php");
+    }   
+
+
+    if(isset($_GET['subscriber'])) {
+        $this_user_id = $_GET['subscriber'];
+
+        $query = "UPDATE users SET user_role = 'subscriber' WHERE user_id = $this_user_id ";
+
+        $update_user_role = mysqli_query($connection, $query);
+
+        confirm_query($update_user_role);
+
+        header("Location: users.php");
+    } 
+
+    ?>
 
     
     </tbody>
