@@ -1,13 +1,42 @@
+<?php 
+
+if(isset($_POST['add_user'])) {
+
+    $username       = $_POST['username'];
+    $user_password  = $_POST['user_password'];
+    $user_firstname = $_POST['user_firstname'];
+    $user_lastname  = $_POST['user_lastname'];
+    $user_email     = $_POST['user_email'];
+    $user_role      = $_POST['user_role'];
+
+    $query  = "INSERT INTO users ";
+    $query .= "(username, user_password, user_firstname, ";
+    $query .= "user_lastname, user_email, user_role) ";
+    $query .= "VALUES (";
+    $query .= "'$username', '$user_password', '$user_firstname', ";
+    $query .= "'$user_lastname', '$user_email', '$user_role') ";
+
+    $add_user = mysqli_query($connection, $query);
+ 
+    confirm_query($add_user);
+
+}
+
+
+
+?>
+
+
 
 <form action="" method="post" enctype="multipart/form-data">
 
     <div class ="form-group">
-        <label for ="title">Firstname</label>
+        <label for ="firstname">Firstname</label>
         <input type="text" class="form-control" name="user_firstname">
     </div>
 
     <div class ="form-group">
-        <label for ="post_status">Lastname</label>
+        <label for ="lastname">Lastname</label>
         <input type="text" class="form-control" name="user_lastname">
     </div>
 
