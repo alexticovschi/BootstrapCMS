@@ -20,7 +20,7 @@
                         <div class="col-xs-6">
 
                             <?php insert_categories(); ?>
-                            <?php update_caterories(); ?>  
+                            <?php update_categories(); ?>  
 
                             <form action="" method="post">
                                 <div class="form-group">
