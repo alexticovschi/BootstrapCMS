@@ -47,6 +47,29 @@
 
 
     ?>
+
+
+
+    <?php
+
+    if(isset($_GET['delete'])) {
+        $this_user_id = $_GET['delete'];
+
+        $query = "DELETE FROM users WHERE user_id = $this_user_id";
+
+        $delete_user = mysqli_query($connection, $query);
+
+        confirm_query($delete_user);
+
+        header("Location: users.php");
+    }
+
+
+
+    ?>
+
+
+
     
     </tbody>
 </table>
