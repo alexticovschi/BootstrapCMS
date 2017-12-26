@@ -21,6 +21,7 @@
     }
 
 
+
 ?>
 
 
@@ -43,25 +44,19 @@
         <label for ="user_role">User Role</label>
         <br>
         <select name="user_role" id="">
-            <option value="subscriber">Select Options</option>
-            <option value="admin">Admin</option>
-            <option value="subscriber">Subscriber</option>
-            <?php
-
-            // $query = "SELECT * FROM users";
-            // $select_user_role = mysqli_query($connection, $query);
-
-            // confirm_query($select_user_role);
-
-            // while($row = mysqli_fetch_assoc($select_user_role)) {
-            //     $user_id   = $row['user_id'];
-            //     $user_role = $row['user_role'];
-
-            //     echo "<option value='$user_id'>{$user_role}</option>";
-            // }
-
-
-            ?>
+          <option value="<?php echo $user_role; ?>"><?php echo ucfirst($user_role); ?></option>
+         
+          <?php
+         
+              $roles = ["admin", "subscriber"];
+             
+              foreach ($roles as $role) {
+                if ($role !== $user_role) {
+                  echo "<option value='{$role}'>" . ucfirst($role) . "</option>";
+                }
+              }
+         
+          ?>
 
         </select>
     </div>
