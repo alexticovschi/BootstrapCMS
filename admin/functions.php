@@ -215,7 +215,7 @@ function insert_categories() {
 
 
 // UPDATE CATEGORIES INTO categories TABLE
-function update_caterories() {
+function update_categories() {
 	global $connection;
 
     // if the edit link is accessed, get the value of edit key(the id)
