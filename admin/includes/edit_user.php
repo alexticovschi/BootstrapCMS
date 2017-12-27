@@ -21,6 +21,32 @@
     }
 
 
+    // EDIT USER
+    if(isset($_POST['edit_user'])) {
+
+        $username = $_POST['username']; 
+        $user_firstname = $_POST['user_firstname']; 
+        $user_lastname = $_POST['user_lastname']; 
+        $user_email = $_POST['user_email']; 
+        $user_role = $_POST['user_role']; 
+        $user_password = $_POST['user_password']; 
+
+        $query = "UPDATE users SET ";
+        $query .= "username = '$username', ";
+        $query .= "user_firstname = '$user_firstname', ";
+        $query .= "user_lastname = '$user_lastname', ";
+        $query .= "user_email = '$user_email', ";
+        $query .= "user_role = '$user_role', ";
+        $query .= "user_password = '$user_password' ";
+        $query .= "WHERE user_id = $u_id ";
+
+        $update_user = mysqli_query($connection, $query);
+
+        confirm_query($update_user);
+        
+        header("Location: users.php");
+        
+    }    
 
 ?>
 
