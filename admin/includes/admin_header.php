@@ -1,7 +1,7 @@
 <?php 
     // buffers request in the headers of the scripts
     ob_start(); 
-
+    session_start();
     header('Content-Type: text/html; charset=ISO-8859-1');
 ?> 
 <?php include("../includes/db.php"); ?>
