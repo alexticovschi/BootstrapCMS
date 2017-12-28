@@ -1,18 +1,18 @@
+<?php include("../includes/db.php"); ?>
+<?php include("functions.php"); ?>
 <?php 
     // buffers request in the headers of the scripts
     ob_start(); 
     session_start();
     header('Content-Type: text/html; charset=ISO-8859-1');
 ?> 
-<?php include("../includes/db.php"); ?>
-<?php include("functions.php"); ?>
 
 <?php 
 
-if(isset($_SESSION['user_role'])) {
-    if($_SESSION['user_role'] !== 'admin') {
-        header("Location: ../index.php");
-    }
+if(!isset($_SESSION['user_role'])) {
+
+    header("Location: ../index.php");
+
 }
 
 ?>
