@@ -7,6 +7,15 @@
     header('Content-Type: text/html; charset=ISO-8859-1');
 ?> 
 
+<?php 
+
+if(!isset($_SESSION['user_role'])) {
+
+    header("Location: ../index.php");
+
+}
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
