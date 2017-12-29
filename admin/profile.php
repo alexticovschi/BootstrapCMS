@@ -11,6 +11,7 @@
 
                 <?php
 
+
                 if(isset($_SESSION['username'])) {
                     $username = $_SESSION['username'];
                     $query = "SELECT * FROM users WHERE username = '{$username}' ";
@@ -25,6 +26,36 @@
                         $user_password  = $row['user_password'];
                     }
                 } 
+
+
+
+                // EDIT USER
+                if(isset($_POST['update_user'])) {
+
+                    $username = $_POST['username']; 
+                    $user_firstname = $_POST['user_firstname']; 
+                    $user_lastname = $_POST['user_lastname']; 
+                    $user_email = $_POST['user_email']; 
+                    $user_role = $_POST['user_role']; 
+                    $user_password = $_POST['user_password']; 
+
+                    $query = "UPDATE users SET ";
+                    $query .= "user_firstname = '$user_firstname', ";
+                    $query .= "user_lastname = '$user_lastname', ";
+                    $query .= "user_email = '$user_email', ";
+                    $query .= "user_role = '$user_role', ";
+                    $query .= "user_password = '$user_password' ";
+                    $query .= "WHERE user_id= '$user_id' ";
+
+                    $update_user = mysqli_query($connection, $query);
+
+                    confirm_query($update_user);
+                    
+                    header("Location: users.php");
+                    
+                }  
+
+
 
                 ?>
 
@@ -79,10 +110,10 @@
                                 <input type="file" name="image">
                             </div> -->
 
-                            <div class ="form-group">
+<!--                             <div class ="form-group">
                                 <label for ="username">Username</label>
                                 <input value="<?php echo $username; ?>" type="text" class="form-control" name="username">
-                            </div>
+                            </div> -->
 
                             <div class ="form-group">
                                 <label for ="user_email">Email</label>
