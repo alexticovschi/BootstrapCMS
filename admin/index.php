@@ -31,8 +31,23 @@
                                         <i class="fa fa-file-text fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                  <div class='huge'>12</div>
-                                        <div>Posts</div>
+
+                                    <?php 
+
+                                    $query = "SELECT * FROM posts";
+                                    $select_all_posts = mysqli_query($connection, $query);
+
+                                    $post_count= mysqli_num_rows($select_all_posts);
+                                    echo "<div class='huge'>$post_count</div>";
+
+                                    if($post_count > 1) {
+                                        echo "<div>Posts</div>";
+                                    } else {
+                                        echo "<div>Post</div>";
+                                    }
+
+                                    ?>
+
                                     </div>
                                 </div>
                             </div>
@@ -53,8 +68,23 @@
                                         <i class="fa fa-comments fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                     <div class='huge'>23</div>
-                                      <div>Comments</div>
+
+                                    <?php 
+
+                                    $query = "SELECT * FROM comments";
+                                    $select_all_comments = mysqli_query($connection, $query);
+
+                                    $comment_count= mysqli_num_rows($select_all_comments);
+                                    echo "<div class='huge'>$comment_count</div>";
+
+                                    if($comment_count > 1) {
+                                        echo "<div>Comments</div>";
+                                    } else {
+                                        echo "<div>Comment</div>";
+                                    }
+
+                                    ?>
+
                                     </div>
                                 </div>
                             </div>
@@ -75,8 +105,23 @@
                                         <i class="fa fa-user fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                    <div class='huge'>23</div>
-                                        <div> Users</div>
+
+                                    <?php 
+
+                                    $query = "SELECT * FROM users";
+                                    $select_all_users = mysqli_query($connection, $query);
+
+                                    $user_count= mysqli_num_rows($select_all_users);
+                                    echo "<div class='huge'>$user_count</div>";
+
+                                    if($user_count > 1) {
+                                        echo "<div>Users</div>";
+                                    } else {
+                                        echo "<div>User</div>";
+                                    }
+
+                                    ?>
+
                                     </div>
                                 </div>
                             </div>
@@ -97,8 +142,23 @@
                                         <i class="fa fa-list fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class='huge'>13</div>
-                                         <div>Categories</div>
+
+                                    <?php 
+
+                                    $query = "SELECT * FROM categories";
+                                    $select_all_categories = mysqli_query($connection, $query);
+
+                                    $category_count= mysqli_num_rows($select_all_categories);
+                                    echo "<div class='huge'>$category_count</div>";
+
+                                    if($category_count > 1) {
+                                        echo "<div>Categories</div>";
+                                    } else {
+                                        echo "<div>Category</div>";
+                                    }
+
+                                    ?>
+                                    
                                     </div>
                                 </div>
                             </div>
