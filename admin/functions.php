@@ -279,8 +279,7 @@ function create_post() {
         $post_image_temp = $_FILES['image']['tmp_name']; 
 
         $post_tags = $_POST['post_tags'];  
-        $post_content = $_POST['post_content'];  
-        // $post_comment_count = 4; 
+        $post_content = mysqli_real_escape_string($connection, $_POST['post_content']);   
         $post_date = date('d-m-y');
 
         move_uploaded_file($post_image_temp, "../images/$post_image");
@@ -290,7 +289,7 @@ function create_post() {
         $query .= "post_content, post_tags, post_status) ";
         $query .= "VALUES(";
         $query .= "$post_category_id, '$post_title', '$post_author', now(), '$post_image', ";
-        $query .= "'$post_content', '$post_tags', $post_comment_count, '$post_status'";
+        $query .= "'$post_content', '$post_tags', '$post_status'";
         $query .= ")";
 
         $insert_query = mysqli_query($connection, $query);
