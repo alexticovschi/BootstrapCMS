@@ -1,5 +1,6 @@
 <?php
     header('Content-Type: text/html; charset=ISO-8859-1');
+    session_start();
 ?>
 <?php include("db.php"); ?>
 <?php include("admin/functions.php"); ?>
