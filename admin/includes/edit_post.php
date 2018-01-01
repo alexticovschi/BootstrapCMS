@@ -57,7 +57,9 @@ if(isset($_GET['p_id'])) {
 
         confirm_query($update_post);
 
-        header("Location: posts.php");
+        echo "<h4 style='padding: 8px; border-radius: 2px' class='bg-success'>Post Updated. <a href='../post.php?p_id={$post_id}'>View Post</a> or <a href='posts.php'>Edit More Posts</a></h4>";
+
+        //header("Location: posts.php");
 
     }
 
