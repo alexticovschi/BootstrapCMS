@@ -168,7 +168,7 @@ function find_all_posts() {
 
         ?>
 
-        <td><input id='checkBoxes' type='checkbox' name='checkBoxArray[]' value='<?php echo $post_id; ?>'></td>
+        <td><input class='checkBoxes' type='checkbox' name='checkBoxArray[]' value='<?php echo $post_id; ?>'></td>
 
         <?php
             echo "<td>$post_id</td>";
