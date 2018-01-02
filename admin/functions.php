@@ -163,8 +163,14 @@ function find_all_posts() {
         $post_tags = $row['post_tags'];  
         $post_comment_count = $row['post_comment_count']; 
         $post_date = $row['post_date'];
-
+        
         echo "<tr>";
+
+        ?>
+
+        <td><input id='checkBoxes' type='checkbox' name='checkBoxArray[]' value='<?php echo $post_id; ?>'></td>
+
+        <?php
             echo "<td>$post_id</td>";
             echo "<td>$post_author</td>";
             echo "<td>$post_title</td>";
