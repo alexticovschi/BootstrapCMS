@@ -301,6 +301,10 @@ function create_post() {
         $insert_query = mysqli_query($connection, $query);
 
         confirm_query($insert_query);
+
+        $post_id = mysqli_insert_id($connection);
+
+        echo "<h4 style='padding: 8px; border-radius: 2px' class='bg-success'>Post Created. <a href='../post.php?p_id={$post_id}'>View Post</a></h4>";
         
     }
 }
