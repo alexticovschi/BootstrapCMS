@@ -1,12 +1,5 @@
 <?php  create_post();  ?>
 
-<?php 
-
-if(isset())
-
-?>
-
-
 <form action="" method="post" enctype="multipart/form-data">
 
     <div class ="form-group">
