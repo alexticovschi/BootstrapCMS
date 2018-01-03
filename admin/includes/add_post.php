@@ -1,4 +1,12 @@
-<?php  create_post();  ?>
+<?php create_post();  ?>
+
+<?php 
+
+if(isset($_POST['create_post'])) {
+    echo "<h4 style='padding: 8px; border-radius: 2px' class='bg-success'>Post Added. <a href='posts.php'>View Posts</a></h4>";
+}
+
+?>
 
 
 <form action="" method="post" enctype="multipart/form-data">
@@ -65,7 +73,7 @@
     </div>
 
     <div class="form-group">
-        <input class="btn btn-primary" type="submit" name="create_post" value="Publish Post">
+        <input class="btn btn-primary" type="submit" name="create_post" value="Add Post">
     </div>
 
 </form>
