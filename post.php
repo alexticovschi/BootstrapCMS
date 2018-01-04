@@ -50,9 +50,6 @@
                 <p><?php echo $post_content; ?></p>
 
                 <hr>
-    
-
-
 
                 <?php } ?> <!-- close the loop -->
 
@@ -69,29 +66,43 @@
                     $comment_email = $_POST['comment_email'];
                     $comment_content = mysqli_escape_string($connection, $_POST['comment_content']);
 
-                    $query  = "INSERT INTO comments ";
-                    $query .= "(comment_post_id, comment_author, comment_email, ";
-                    $query .= "comment_content, comment_status, comment_date) ";
-                    $query .= "VALUES ($post_id, '$comment_author', '$comment_email', ";
-                    $query .= "'$comment_content', 'unapproved', now())";
+                    if(!empty($comment_author) && !empty($comment_email) && !empty($comment_content)) {                 
 
-                    $insert_comment = mysqli_query($connection, $query);
-                    confirm_query($insert_comment);
+	                    $query  = "INSERT INTO comments ";
+	                    $query .= "(comment_post_id, comment_author, comment_email, ";
+	                    $query .= "comment_content, comment_status, comment_date) ";
+	                    $query .= "VALUES ($post_id, '$comment_author', '$comment_email', ";
+	                    $query .= "'$comment_content', 'unapproved', now())";
 
-                    $query  = "UPDATE posts SET post_comment_count = post_comment_count + 1 ";
-                    $query .= "WHERE post_id = $post_id ";
+	                    $insert_comment = mysqli_query($connection, $query);
+	                    confirm_query($insert_comment);
 
-                    $update_post_comment_count = mysqli_query($connection, $query);
-                    confirm_query($update_post_comment_count);
+	                    $query  = "UPDATE posts SET post_comment_count = post_comment_count + 1 ";
+	                    $query .= "WHERE post_id = $post_id ";
+
+	                    $update_post_comment_count = mysqli_query($connection, $query);
+	                    confirm_query($update_post_comment_count);
+
+                	}  else {
+                		?>
+						
+						<script>
+							alert('Fields cannot be empty!');
+						</script>
+
+                		<?php
+                	}
                 }
 
                 ?>
 
 
+
+
                 <!-- Comments Form -->
                 <div class="well">
                     <h4>Leave a Comment:</h4>
-                    <form action="" method="post" role="form">
+                    <form id="comments_form" action="" method="post" role="form">
                         <div class="form-group">
                             <label for="Author">Author</label>
                             <input class="form-control" type="text" name="comment_author">
