@@ -279,7 +279,7 @@ function create_post() {
 
         $post_category_id = $_POST['post_category'];
         $post_author = $_POST['post_author']; 
-        $post_title = $_POST['post_title'];                                   
+        $post_title = mysqli_real_escape_string($connection, $_POST['post_title']);                                   
         $post_status = $_POST['post_status'];  
 
         $post_image = $_FILES['image']['name']; 
