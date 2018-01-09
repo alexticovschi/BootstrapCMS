@@ -148,7 +148,7 @@ function approve_comment() {
 function find_all_posts() {
     global $connection;
 
-    $query = "SELECT * FROM posts";
+    $query = "SELECT * FROM posts ORDER BY post_id ASC";
     $select_posts = mysqli_query($connection, $query);
 
     confirm_query($select_posts);

@@ -29,7 +29,37 @@ if(isset($_POST['checkBoxArray'])) {
 
                 confirm_query($delete_post);
                 break;
-            
+
+            case 'clone':
+                $query = "SELECT * FROM posts WHERE post_id = '{$post_id}' ";
+                $select_post = mysqli_query($connection, $query);
+
+                while ($row = mysqli_fetch_array($select_post)) {
+                    $post_title = $row['post_title'];
+                    $post_category_id = $row['post_category_id'];
+                    $post_date = $row['post_date'];
+                    $post_author = $row['post_author'];
+                    $post_status = $row['post_status'];
+                    $post_image = $row['post_image'];
+                    $post_tags = $row['post_tags'];
+                    $post_content = $row['post_content'];
+                }
+
+                $post_title = mysqli_real_escape_string($connection, $post_title);
+                $post_content = mysqli_real_escape_string($connection, $post_content);
+                
+                $query = "INSERT INTO posts ";
+                $query .= "(post_category_id, post_title, post_author, post_date, post_image, ";
+                $query .= "post_content, post_tags, post_status) ";
+                $query .= "VALUES(";
+                $query .= "$post_category_id, '$post_title', '$post_author', now(), '$post_image', ";
+                $query .= "'$post_content', '$post_tags', '$post_status'";
+                $query .= ")";
+                
+                $clone_posts = mysqli_query($connection, $query);
+                confirm_query($clone_posts);
+                break;
+
             default:
                 # code...
                 break;
@@ -51,6 +81,7 @@ if(isset($_POST['checkBoxArray'])) {
                 <option value="published">Publish</option>
                 <option value="draft">Draft</option>
                 <option value="delete">Delete</option>
+                <option value="clone">Clone</option>
             </select>
 
         </div>
