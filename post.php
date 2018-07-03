@@ -16,46 +16,60 @@
 
                 if(isset($_GET['p_id'])) {
                     $post_id = $_GET['p_id'];
+                
+                    $view_query = "UPDATE posts SET post_views_count = post_views_count + 1 WHERE post_id = $post_id";
+                    $send_query = mysqli_query($connection, $view_query);
+
+                    if(!$send_query) { die("query failed"); }
+
+                    $query = "SELECT * FROM posts WHERE post_id = $post_id";
+                    $post_query = mysqli_query($connection, $query);
+
+                    while($row = mysqli_fetch_assoc($post_query)) {
+                        $post_title = $row['post_title'];
+                        $post_author = $row['post_author'];
+                        $post_content = $row['post_content'];
+                        $post_date = $row['post_date'];
+                        $post_image = $row['post_image'];
+
+                    ?>    
+
+
+                    <h1 class="page-header">
+                        Page Heading
+                        <small>Secondary Text</small>
+                    </h1>
+
+                    <!-- First Blog Post -->
+                    <h2>
+                        <a href=""><?php echo $post_title; ?></a>
+                    </h2>
+                    <p class="lead">
+                        by <a href="index.php"><?php echo $post_author; ?></a>
+                    </p>
+                    <p><span class="glyphicon glyphicon-time"></span> Posted on <?php echo $post_date; ?></p>
+                    <hr>
+                    <img class="img-responsive" src="images/<?php echo $post_image ?>" alt="">
+                    <hr>
+                    <p><?php echo $post_content; ?></p>
+
+                    <hr>
+
+                    <?php } 
+
+                } else {
+
+                    header("Location: index.php");
+
+
                 }
 
-                $query = "SELECT * FROM posts WHERE post_id = $post_id";
-                $post_query = mysqli_query($connection, $query);
-
-                while($row = mysqli_fetch_assoc($post_query)) {
-                    $post_title = $row['post_title'];
-                    $post_author = $row['post_author'];
-                    $post_content = $row['post_content'];
-                    $post_date = $row['post_date'];
-                    $post_image = $row['post_image'];
-
-                ?>    
 
 
-                <h1 class="page-header">
-                    Page Heading
-                    <small>Secondary Text</small>
-                </h1>
-
-                <!-- First Blog Post -->
-                <h2>
-                    <a href=""><?php echo $post_title; ?></a>
-                </h2>
-                <p class="lead">
-                    by <a href="index.php"><?php echo $post_author; ?></a>
-                </p>
-                <p><span class="glyphicon glyphicon-time"></span> Posted on <?php echo $post_date; ?></p>
-                <hr>
-                <img class="img-responsive" src="images/<?php echo $post_image ?>" alt="">
-                <hr>
-                <p><?php echo $post_content; ?></p>
-
-                <hr>
-
-                <?php } ?> <!-- close the loop -->
+                ?> 
 
 
-               <!-- Blog Comments -->
-
+                <!-- Blog Comments -->
 
                 <?php
 

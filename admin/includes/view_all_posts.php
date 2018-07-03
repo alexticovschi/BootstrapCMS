@@ -43,6 +43,7 @@ if(isset($_POST['checkBoxArray'])) {
                     $post_image = $row['post_image'];
                     $post_tags = $row['post_tags'];
                     $post_content = $row['post_content'];
+                    $post_views_count = $row['post_views_count'];
                 }
 
                 $post_title = mysqli_real_escape_string($connection, $post_title);
@@ -105,6 +106,7 @@ if(isset($_POST['checkBoxArray'])) {
                 <th>View Post</th>
                 <th>Edit</th>
                 <th>Delete</th>
+                <th>Views</th>
             </tr>
         </thead>
         <tbody>
