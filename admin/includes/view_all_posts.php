@@ -117,7 +117,9 @@ if(isset($_POST['checkBoxArray'])) {
 
 
 
-<?php delete_post(); ?>
+<?php delete_post() ?>
+<?php reset_post_views() ?>
+
 
 
 
