@@ -14,12 +14,17 @@
                 
                 <?php
 
+                isset($_GET['page']) ? $page = $_GET['page'] : $page = '';
+            
+                ($page == "" || $page == 1) ? $page_1 = 0 : $page_1 = ($page * 5) - 5;
+                
+
                 $post_count = "SELECT * FROM posts";
                 $total_posts = mysqli_num_rows(mysqli_query($connection, $post_count));
                 $total_posts = ceil($total_posts / 5);
 
 
-                $query = "SELECT * FROM posts WHERE post_status = 'published' LIMIT 5, 5";
+                $query = "SELECT * FROM posts WHERE post_status = 'published' LIMIT $page_1, 5";
                 $posts_query = mysqli_query($connection, $query);
 
                 if (mysqli_num_rows($posts_query) == 0) {
