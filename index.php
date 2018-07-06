@@ -13,18 +13,19 @@
             <div class="col-md-8">
                 
                 <?php
+                
+                $per_page = 5;
 
                 isset($_GET['page']) ? $page = $_GET['page'] : $page = '';
-            
-                ($page == "" || $page == 1) ? $page_1 = 0 : $page_1 = ($page * 5) - 5;
+                ($page == "" || $page == 1) ? $page_1 = 0 : $page_1 = ($page * $per_page) - $per_page;
                 
 
                 $post_count = "SELECT * FROM posts";
                 $total_posts = mysqli_num_rows(mysqli_query($connection, $post_count));
-                $total_posts = ceil($total_posts / 5);
+                $total_posts = ceil($total_posts / $per_page);
 
 
-                $query = "SELECT * FROM posts WHERE post_status = 'published' LIMIT $page_1, 5";
+                $query = "SELECT * FROM posts WHERE post_status = 'published' LIMIT $page_1, $per_page";
                 $posts_query = mysqli_query($connection, $query);
 
                 if (mysqli_num_rows($posts_query) == 0) {
@@ -49,7 +50,7 @@
                 </h1>
 
                 <!-- First Blog Post -->
-                <h1><?php echo 'Total Posts: ' . $total_posts ?></h1>
+                <!-- <h1><?php echo 'Total Posts: ' . $total_posts ?></h1> -->
 
                 <h2>
                     <a href="post.php?p_id=<?php echo $post_id; ?>"><?php echo $post_title; ?></a>
