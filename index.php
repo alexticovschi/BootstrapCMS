@@ -14,7 +14,13 @@
                 
                 <?php
 
-                $query = "SELECT * FROM posts WHERE post_status = 'published' ";
+                $post_count = "SELECT * FROM posts";
+                $total_posts = mysqli_num_rows(mysqli_query($connection, $post_count));
+                echo('Total Posts: ' . $total_posts);
+
+
+
+                $query = "SELECT * FROM posts WHERE post_status = 'published' LIMIT 5, 5";
                 $posts_query = mysqli_query($connection, $query);
 
                 if (mysqli_num_rows($posts_query) == 0) {
