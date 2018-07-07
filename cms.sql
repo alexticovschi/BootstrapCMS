@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 26, 2017 at 07:30 PM
+-- Generation Time: Jul 07, 2018 at 07:57 AM
 -- Server version: 5.7.14
 -- PHP Version: 7.0.10
 
@@ -41,7 +41,6 @@ INSERT INTO `categories` (`cat_id`, `cat_title`) VALUES
 (3, 'PHP'),
 (23, 'CSS3'),
 (25, 'Angular'),
-(26, 'OOP'),
 (29, 'React');
 
 -- --------------------------------------------------------
@@ -74,7 +73,8 @@ INSERT INTO `comments` (`comment_id`, `comment_post_id`, `comment_author`, `comm
 (13, 1, 'Tim Grover', 'grove@gmail.com', 'Some comment here!', 'approved', '2017-12-25'),
 (12, 1, 'Paul Walker', 'walk@gmail.com', 'Hard to read. Not for beginners.', 'approved', '2017-12-25'),
 (14, 2, 'Greg Francis', 'gfracis@gmail.com', 'Most programmers wouldn\'t believe Javascript has good parts! but Douglas Crockford does a great job highlighting them!', 'approved', '2017-12-25'),
-(15, 2, 'Juan Torres', 'juantorres@gmail.com', 'First, understand that this is not a book for novice programmers. It\'s intended for experienced programmers who are just getting into Javascript, or those who have already dabbled in Javascript and want to get better at it.', 'approved', '2017-12-25');
+(15, 2, 'Juan Torres', 'juantorres@gmail.com', 'First, understand that this is not a book for novice programmers. It\'s intended for experienced programmers who are just getting into Javascript, or those who have already dabbled in Javascript and want to get better at it.', 'approved', '2017-12-25'),
+(16, 12, 'Josh Laram', 'jlaram@gmail.com', 'One of the best book on this subject', 'approved', '2018-01-01');
 
 -- --------------------------------------------------------
 
@@ -92,21 +92,39 @@ CREATE TABLE `posts` (
   `post_content` text NOT NULL,
   `post_tags` varchar(255) NOT NULL,
   `post_comment_count` int(11) NOT NULL,
-  `post_status` varchar(255) NOT NULL DEFAULT 'draft'
+  `post_status` varchar(255) NOT NULL DEFAULT 'draft',
+  `post_views_count` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `posts`
 --
 
-INSERT INTO `posts` (`post_id`, `post_category_id`, `post_title`, `post_author`, `post_date`, `post_image`, `post_content`, `post_tags`, `post_comment_count`, `post_status`) VALUES
-(1, 1, 'You Don\'t Know JS', 'Kyle Simpson', '2017-12-25', 'js.jpg', 'No matter how much experience you have with JavaScript, odds are you don’t fully understand the language. This concise yet in-depth guide takes you inside scope and closures, two core concepts you need to know to become a more efficient and effective JavaScript programmer.                                                                                                                ', 'kyle, javascript, js', 1, 'published'),
-(2, 1, 'JavaScript: The Good Parts', 'Douglas Crockford', '2017-12-25', 'js_good_parts.jpg', 'Most programming languages contain good and bad parts, but JavaScript has more than its share of the bad, having been developed and released in a hurry before it could be refined. This authoritative book scrapes away these bad features to reveal a subset of JavaScript that\'s more reliable, readable, and maintainable than the language as a whole—a subset you can use to create truly extensible and efficient code.                ', 'javascript, crockford, programming', 2, 'published'),
-(3, 1, 'Modern PHP: New Features and Good Practices', 'Josh Lockhart', '2017-12-25', 'php2.jpg', 'PHP is experiencing a renaissance, though it may be difficult to tell with all of the outdated PHP tutorials online. With this practical guide, you’ll learn how PHP has become a full-featured, mature language with object-orientation, namespaces, and a growing collection of reusable component libraries.        ', 'oop, php, lockhart', 0, 'published'),
-(9, 1, 'JavaScript', 'Alex Ticovschi', '2017-12-25', 'javascript.jpg', 'JavaScript is one of the 3 languages all web developers must learn                                        ', 'javascript, course, class, promises, functional programming', 4, 'published'),
-(12, 1, 'Ng-Book 2: The Complete Book on Angular 2', 'Nate Murray, Ari Lerner, Felipe Coury,  Carlos Taborda', '2017-12-25', 'ang2.jpg', '             What if you could master the entire framework - with solid foundations - in less time without beating your head against a wall? Imagine how quickly you could work if you knew the best practices and the best tools?                                ', 'angular, angular2, framework, js', 4, 'published'),
-(13, 29, 'Learning React: Functional Web Development with React and Flux', 'Alex Banks, Eve Porcello', '2017-12-22', 'reactjs.jpg', 'If you want to learn how to build efficient user interfaces with React, this is your book. Authors Alex Banks and Eve Porcello show you how to create UIs with this small JavaScript library that can deftly display data changes on large-scale, data-driven websites without page reloads.        ', 'reactjs, library, javascript, js', 4, 'published'),
-(14, 1, 'Bootstrap ', 'Jake Spurlock', '2017-12-25', 'bootstrap.jpg', '                                    Discover how easy it is to design killer interfaces and responsive websites with the Bootstrap framework. This practical book gets you started building pages with Bootstrap’s HTML/CSS-based tools and design templates right away.                         ', 'bootstrap, framework, css', 4, 'published');
+INSERT INTO `posts` (`post_id`, `post_category_id`, `post_title`, `post_author`, `post_date`, `post_image`, `post_content`, `post_tags`, `post_comment_count`, `post_status`, `post_views_count`) VALUES
+(1, 2, 'You Don\'t Know JS', 'Kyle Simpson', '2018-01-07', 'js.jpg', '<p>No matter how much experience you have with JavaScript, odds are you don&rsquo;t fully understand the language. This concise yet in-depth guide takes you inside scope and closures, two core concepts you need to know to become a more efficient and effective JavaScript programmer.</p>', 'kyle, javascript, js', 17, 'published', 3),
+(2, 2, 'JavaScript: The Good Parts', 'Douglas Crockford', '2018-01-01', 'js_good_parts.jpg', '<p>Most programming languages contain good and bad parts, but JavaScript has more than its share of the bad, having been developed and released in a hurry before it could be refined. This authoritative book scrapes away these bad features to reveal a subset of JavaScript that\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\'s more reliable, readable, and maintainable than the language as a whole&mdash;a subset you can use to create truly extensible and efficient code.</p>', 'javascript, crockford, programming', 2, 'published', 1),
+(3, 3, 'Modern PHP: New Features and Good Practices', 'Josh Lockhart', '2018-01-01', 'php2.jpg', '                                    PHP is experiencing a renaissance, though it may be difficult to tell with all of the outdated PHP tutorials online. With this practical guide, you’ll learn how PHP has become a full-featured, mature language with object-orientation, namespaces, and a growing collection of reusable component libraries.                                ', 'oop, php, lockhart', 0, 'published', 3),
+(9, 2, 'JavaScript', 'Alex Ticovschi', '2018-01-01', 'javascript.jpg', '                                                            JavaScript is one of the 3 languages all web developers must learn                                                                                ', 'javascript, course, class, promises, functional programming', 0, 'published', 0),
+(12, 25, 'Ng-Book 2: The Complete Book on Angular 2', 'Nate Murray, Ari Lerner, Felipe Coury,  Carlos Taborda', '2018-01-01', 'ang2.jpg', '<p>What if you could master the entire framework - with solid foundations - in less time without beating your head against a wall? Imagine how quickly you could work if you knew the best practices and the best tools?</p>', 'angular, angular2, framework, js', 2, 'published', 0),
+(13, 29, 'Learning React: Functional Web Development with React and Flux', 'Alex Banks, Eve Porcello', '2018-01-01', 'reactjs.jpg', '                                    If you want to learn how to build efficient user interfaces with React, this is your book. Authors Alex Banks and Eve Porcello show you how to create UIs with this small JavaScript library that can deftly display data changes on large-scale, data-driven websites without page reloads.                                ', 'reactjs, library, javascript, js', 1, 'published', 2),
+(14, 1, 'Bootstrap ', 'Jake Spurlock', '2018-01-01', 'bootstrap.jpg', '                                    Discover how easy it is to design killer interfaces and responsive websites with the Bootstrap framework. This practical book gets you started building pages with Bootstrap’s HTML/CSS-based tools and design templates right away.                                                         ', 'bootstrap, framework, css', 1, 'published', 0),
+(42, 2, 'You Don\'t Know JS - Scope & Closures', 'Kyle Simpson', '2018-01-09', 'js.jpg', '<p>&nbsp;</p>\r\n<p style="box-sizing: border-box; font-family: guardian-text-oreilly, Helvetica, sans-serif; margin: 1.2rem 0px 0px; padding: 0px; border: 0px; vertical-align: baseline; font-size: 14.4px; line-height: 1.3rem; color: #404040; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-style: initial; text-decoration-color: initial;">Like other books in the "You Don&rsquo;t Know JS" series,&nbsp;<em style="box-sizing: border-box; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">Scope and Closures</em>&nbsp;dives into trickier parts of the language that many JavaScript programmers simply avoid. Armed with this knowledge, you can achieve true JavaScript mastery.</p>', 'javascript, book, js, scopes, closures', 0, 'published', 0),
+(48, 2, 'You Don\'t Know JS', 'Kyle Simpson', '2018-01-09', 'js.jpg', '<p>No matter how much experience you have with JavaScript, odds are you don&rsquo;t fully understand the language. This concise yet in-depth guide takes you inside scope and closures, two core concepts you need to know to become a more efficient and effective JavaScript programmer.</p>', 'kyle, javascript, js', 0, 'published', 1),
+(49, 2, 'JavaScript: The Good Parts', 'Douglas Crockford', '2018-01-09', 'js_good_parts.jpg', '<p>Most programming languages contain good and bad parts, but JavaScript has more than its share of the bad, having been developed and released in a hurry before it could be refined. This authoritative book scrapes away these bad features to reveal a subset of JavaScript that\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\'s more reliable, readable, and maintainable than the language as a whole&mdash;a subset you can use to create truly extensible and efficient code.</p>', 'javascript, crockford, programming', 0, 'published', 3),
+(50, 2, 'JavaScript', 'Alex Ticovschi', '2018-01-09', 'javascript.jpg', '                                                            JavaScript is one of the 3 languages all web developers must learn                                                                                ', 'javascript, course, class, promises, functional programming', 0, 'published', 1),
+(51, 2, 'You Don\'t Know JS - Scope & Closures', 'Kyle Simpson', '2018-01-09', 'js.jpg', '<p>&nbsp;</p>\r\n<p style="box-sizing: border-box; font-family: guardian-text-oreilly, Helvetica, sans-serif; margin: 1.2rem 0px 0px; padding: 0px; border: 0px; vertical-align: baseline; font-size: 14.4px; line-height: 1.3rem; color: #404040; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-style: initial; text-decoration-color: initial;">Like other books in the "You Don&rsquo;t Know JS" series,&nbsp;<em style="box-sizing: border-box; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">Scope and Closures</em>&nbsp;dives into trickier parts of the language that many JavaScript programmers simply avoid. Armed with this knowledge, you can achieve true JavaScript mastery.</p>', 'javascript, book, js, scopes, closures', 0, 'published', 0),
+(52, 2, 'You Don\'t Know JS', 'Kyle Simpson', '2018-07-06', 'js.jpg', '<p>No matter how much experience you have with JavaScript, odds are you don&rsquo;t fully understand the language. This concise yet in-depth guide takes you inside scope and closures, two core concepts you need to know to become a more efficient and effective JavaScript programmer.</p>', 'kyle, javascript, js', 0, 'published', 0),
+(53, 3, 'Modern PHP: New Features and Good Practices', 'Josh Lockhart', '2018-07-06', 'php2.jpg', '                                    PHP is experiencing a renaissance, though it may be difficult to tell with all of the outdated PHP tutorials online. With this practical guide, you’ll learn how PHP has become a full-featured, mature language with object-orientation, namespaces, and a growing collection of reusable component libraries.                                ', 'oop, php, lockhart', 0, 'published', 0),
+(54, 29, 'Learning React: Functional Web Development with React and Flux', 'Alex Banks, Eve Porcello', '2018-07-06', 'reactjs.jpg', '                                    If you want to learn how to build efficient user interfaces with React, this is your book. Authors Alex Banks and Eve Porcello show you how to create UIs with this small JavaScript library that can deftly display data changes on large-scale, data-driven websites without page reloads.                                ', 'reactjs, library, javascript, js', 0, 'published', 2),
+(55, 2, 'JavaScript: The Good Parts', 'Douglas Crockford', '2018-07-06', 'js_good_parts.jpg', '<p>Most programming languages contain good and bad parts, but JavaScript has more than its share of the bad, having been developed and released in a hurry before it could be refined. This authoritative book scrapes away these bad features to reveal a subset of JavaScript that\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\'s more reliable, readable, and maintainable than the language as a whole&mdash;a subset you can use to create truly extensible and efficient code.</p>', 'javascript, crockford, programming', 0, 'published', 0),
+(56, 2, 'JavaScript', 'Alex Ticovschi', '2018-07-06', 'javascript.jpg', '                                                            JavaScript is one of the 3 languages all web developers must learn                                                                                ', 'javascript, course, class, promises, functional programming', 0, 'published', 0),
+(57, 2, 'You Don\'t Know JS', 'Kyle Simpson', '2018-07-06', 'js.jpg', '<p>No matter how much experience you have with JavaScript, odds are you don&rsquo;t fully understand the language. This concise yet in-depth guide takes you inside scope and closures, two core concepts you need to know to become a more efficient and effective JavaScript programmer.</p>', 'kyle, javascript, js', 0, 'published', 0),
+(58, 2, 'JavaScript: The Good Parts', 'Douglas Crockford', '2018-07-06', 'js_good_parts.jpg', '<p>Most programming languages contain good and bad parts, but JavaScript has more than its share of the bad, having been developed and released in a hurry before it could be refined. This authoritative book scrapes away these bad features to reveal a subset of JavaScript that\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\'s more reliable, readable, and maintainable than the language as a whole&mdash;a subset you can use to create truly extensible and efficient code.</p>', 'javascript, crockford, programming', 0, 'published', 0),
+(59, 3, 'Modern PHP: New Features and Good Practices', 'Josh Lockhart', '2018-07-06', 'php2.jpg', '                                    PHP is experiencing a renaissance, though it may be difficult to tell with all of the outdated PHP tutorials online. With this practical guide, you’ll learn how PHP has become a full-featured, mature language with object-orientation, namespaces, and a growing collection of reusable component libraries.                                ', 'oop, php, lockhart', 0, 'published', 0),
+(60, 29, 'Learning React: Functional Web Development with React and Flux', 'Alex Banks, Eve Porcello', '2018-07-06', 'reactjs.jpg', '                                    If you want to learn how to build efficient user interfaces with React, this is your book. Authors Alex Banks and Eve Porcello show you how to create UIs with this small JavaScript library that can deftly display data changes on large-scale, data-driven websites without page reloads.                                ', 'reactjs, library, javascript, js', 0, 'published', 2),
+(61, 2, 'JavaScript: The Good Parts', 'Douglas Crockford', '2018-07-06', 'js_good_parts.jpg', '<p>Most programming languages contain good and bad parts, but JavaScript has more than its share of the bad, having been developed and released in a hurry before it could be refined. This authoritative book scrapes away these bad features to reveal a subset of JavaScript that\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\'s more reliable, readable, and maintainable than the language as a whole&mdash;a subset you can use to create truly extensible and efficient code.</p>', 'javascript, crockford, programming', 0, 'published', 0),
+(62, 2, 'JavaScript', 'Alex Ticovschi', '2018-07-06', 'javascript.jpg', '                                                            JavaScript is one of the 3 languages all web developers must learn                                                                                ', 'javascript, course, class, promises, functional programming', 0, 'published', 0),
+(63, 2, 'You Don\'t Know JS', 'Kyle Simpson', '2018-07-06', 'js.jpg', '<p>No matter how much experience you have with JavaScript, odds are you don&rsquo;t fully understand the language. This concise yet in-depth guide takes you inside scope and closures, two core concepts you need to know to become a more efficient and effective JavaScript programmer.</p>', 'kyle, javascript, js', 0, 'published', 0);
 
 -- --------------------------------------------------------
 
@@ -123,7 +141,7 @@ CREATE TABLE `users` (
   `user_email` varchar(255) NOT NULL,
   `user_image` text NOT NULL,
   `user_role` varchar(255) NOT NULL,
-  `randSalt` varchar(255) NOT NULL
+  `randSalt` varchar(255) NOT NULL DEFAULT ' $2y$10$iusesomecrazystrings22'
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -131,7 +149,23 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `username`, `user_password`, `user_firstname`, `user_lastname`, `user_email`, `user_image`, `user_role`, `randSalt`) VALUES
-(1, 'alex', '123', 'Alex', 'Ticovschi', 'alexticovschi@gmail.com', '', 'admin', '');
+(1, 'alex', '123', 'Alex', 'Ticovschi', 'alexticovschi@gmail.com', '', 'admin', '$2y$10$iusesomecrazystrings22'),
+(2, 'kevin', 'kevin', 'Kevin', 'Durant', 'kd35@gmail.com', '', 'subscriber', '$2y$10$iusesomecrazystrings22'),
+(9, 'tim', '123', 'Tim', 'Grover', 'tgrover@yahoo.com', '', 'admin', ' $2y$10$iusesomecrazystrings22'),
+(23, 'mike', 'mike', 'Mike', 'Miller', 'mikemiller@gmail.com', '', 'admin', '$2y$10$iusesomecrazystrings22'),
+(22, 'chris', '123', 'Chris', 'Cooke', 'cc@gmail.com', '', 'admin', '$2y$10$iusesomecrazystrings22');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users_online`
+--
+
+CREATE TABLE `users_online` (
+  `id` int(11) NOT NULL,
+  `session` varchar(255) NOT NULL,
+  `time` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Indexes for dumped tables
@@ -162,6 +196,12 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`user_id`);
 
 --
+-- Indexes for table `users_online`
+--
+ALTER TABLE `users_online`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -169,22 +209,27 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `cat_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `cat_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 --
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `comment_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `comment_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `post_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `post_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `user_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+--
+-- AUTO_INCREMENT for table `users_online`
+--
+ALTER TABLE `users_online`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
