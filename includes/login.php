@@ -12,7 +12,7 @@ if(isset($_POST['login'])) {
 	$username = mysqli_real_escape_string($connection, $username);
 	$password = mysqli_real_escape_string($connection, $password);
 
-	$query = "SELECT * FROM users WHERE username = '$username' AND user_password = '$password' ";
+	$query = "SELECT * FROM users WHERE username = '$username'";
 	$select_user = mysqli_query($connection, $query);
 
 	confirm_query($select_user);
@@ -26,7 +26,18 @@ if(isset($_POST['login'])) {
 		$db_user_role = $row['user_role'];
 	}
 
-	if($username  === $db_username && $password === $db_user_password && $db_user_role === 'admin') {
+	// if($username  === $db_username && $password === $db_user_password && $db_user_role === 'admin') {
+	// 	$_SESSION['username'] = $db_username; // assign the $db_username value to the username session
+	// 	$_SESSION['firstname'] = $db_user_firstname;
+	// 	$_SESSION['lastname'] = $db_user_lastname;
+	// 	$_SESSION['user_role'] = $db_user_role;
+
+	// 	header("Location: ../admin");
+	// } else {
+	// 	header("Location: ../index.php");
+	// }
+
+	if(password_verify($password, $db_user_password)) {
 		$_SESSION['username'] = $db_username; // assign the $db_username value to the username session
 		$_SESSION['firstname'] = $db_user_firstname;
 		$_SESSION['lastname'] = $db_user_lastname;
@@ -36,6 +47,7 @@ if(isset($_POST['login'])) {
 	} else {
 		header("Location: ../index.php");
 	}
+
 
 }
 
