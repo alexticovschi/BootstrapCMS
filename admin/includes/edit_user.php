@@ -31,22 +31,41 @@
         $user_role = $_POST['user_role']; 
         $user_password = $_POST['user_password']; 
 
-        $query = "UPDATE users SET ";
-        $query .= "username = '$username', ";
-        $query .= "user_firstname = '$user_firstname', ";
-        $query .= "user_lastname = '$user_lastname', ";
-        $query .= "user_email = '$user_email', ";
-        $query .= "user_role = '$user_role', ";
-        $query .= "user_password = '$user_password' ";
-        $query .= "WHERE user_id = $u_id ";
+        if(!empty($user_password)) {
+            $query = "SELECT user_password FROM users WHERE user_id = $user_id";
+            $get_password = mysqli_query($connection, $query);
+            confirm_query($get_password);
 
-        $update_user = mysqli_query($connection, $query);
+            $row = mysqli_fetch_assoc($get_password);
+            $db_user_password = $row['user_password'];
 
-        confirm_query($update_user);
+            if($db_user_password != $user_password) {
+                $hashed_password = password_hash($user_password, PASSWORD_BCRYPT, array('cost' => 10));
+            } else {
+                $hashed_password = $db_user_password;
+            }
+
+            $query = "UPDATE users SET ";
+            $query .= "username = '$username', ";
+            $query .= "user_firstname = '$user_firstname', ";
+            $query .= "user_lastname = '$user_lastname', ";
+            $query .= "user_email = '$user_email', ";
+            $query .= "user_role = '$user_role', ";
+            $query .= "user_password = '$hashed_password' ";
+            $query .= "WHERE user_id = $u_id ";
+
+            $update_user = mysqli_query($connection, $query);
+
+            confirm_query($update_user);
+            
+            header("Location: users.php");
         
-        header("Location: users.php");
+        }
         
-    }    
+    } else {  // If the user id is not present in the URL we redirect to the home page
+        header("Location: index.php");
+    
+    }  
 
 ?>
 
