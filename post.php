@@ -91,11 +91,11 @@
 	                    $insert_comment = mysqli_query($connection, $query);
 	                    confirm_query($insert_comment);
 
-	                    $query  = "UPDATE posts SET post_comment_count = post_comment_count + 1 ";
-	                    $query .= "WHERE post_id = $post_id ";
+	                    // $query  = "UPDATE posts SET post_comment_count = post_comment_count + 1 ";
+	                    // $query .= "WHERE post_id = $post_id ";
 
-	                    $update_post_comment_count = mysqli_query($connection, $query);
-	                    confirm_query($update_post_comment_count);
+	                    // $update_post_comment_count = mysqli_query($connection, $query);
+	                    // confirm_query($update_post_comment_count);
 
                 	}  else {
                 		?>

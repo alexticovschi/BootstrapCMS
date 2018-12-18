@@ -189,7 +189,11 @@ function find_all_posts() {
             echo "<td>$post_status</td>";
             echo "<td><img width='110' class='img-responsive' src='../images/$post_image'></td>";
             echo "<td>$post_tags</td>";
-            echo "<td>$post_comment_count</td>";
+
+            $query = "SELECT * FROM comments WHERE comment_post_id = $post_id";
+            $count_comments = mysqli_num_rows(mysqli_query($connection, $query));
+            echo "<td>$count_comments</td>";
+
             echo "<td>$post_date</td>";   
             echo "<td style='text-align: center'><a href='../post.php?p_id={$post_id}'><i class='fa fa-eye' aria-hidden='true' data-toggle='tooltip' title='View Post'></i></a></td>";  
             echo "<td style='text-align: center'><a href='posts.php?source=edit_post&p_id=$post_id'><i class='fa fa-pencil-square-o' aria-hidden='true' data-toggle='tooltip' title='Edit Post'></i></a></td>";                
