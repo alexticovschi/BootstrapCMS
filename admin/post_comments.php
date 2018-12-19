@@ -93,7 +93,7 @@
                                         echo "<td>$comment_date</td>";  
                                         echo "<td><a href='comments.php?approve=$comment_id'>Approve</a></td>";
                                         echo "<td><a href='comments.php?unapprove=$comment_id'>Unapprove</a></td>";
-                                        echo "<td><a href='comments.php?delete=$comment_id'>Delete</a></td>";                                                        
+                                        echo "<td><a href='post_comments.php?delete=$comment_id&id=". $_GET['id'] ."'>Delete</a></td>";                                                        
                                     echo "</tr>";
                                 }     
 
@@ -111,7 +111,21 @@
 
 
 
-                    <?php delete_comment(); ?>
+                    <?php 
+
+                    if(isset($_GET['delete'])) {
+                        $comment_id = $_GET['delete'];
+
+                        $query = "DELETE FROM comments WHERE comment_id=$comment_id";
+                        $delete_comment = mysqli_query($connection, $query);
+
+                        confirm_query($delete_comment);
+
+                        header("Location: post_comments.php?id=" . $_GET['id'] ."");
+
+                    }
+
+                    ?>
 
 
                     </div>
