@@ -15,7 +15,11 @@
                         <h3 class="page-header">
                             <?php 
 
-                                $query = "SELECT comment_post_id FROM comments WHERE comment_post_id = " . mysqli_real_escape_string($connection, $_GET['id']) ."";
+                                if(isset($_GET['id'])){
+                                    $id = $_GET['id'];
+                                }
+
+                                $query = "SELECT comment_post_id FROM comments WHERE comment_post_id = " . mysqli_real_escape_string($connection, $id) ."";
                                 $select_comment = mysqli_query($connection, $query);
 
                                 confirm_query($select_comment);
@@ -56,7 +60,7 @@
                         <tbody>
                             <?php 
 
-                                $query = "SELECT * FROM comments WHERE comment_post_id = " . mysqli_real_escape_string($connection, $_GET['id']) ."";
+                                $query = "SELECT * FROM comments WHERE comment_post_id = " . mysqli_real_escape_string($connection, $id) ."";
                                 $select_comments = mysqli_query($connection, $query);
 
                                 confirm_query($select_comments);
@@ -91,9 +95,9 @@
 
                                             
                                         echo "<td>$comment_date</td>";  
-                                        echo "<td><a href='comments.php?approve=$comment_id'>Approve</a></td>";
-                                        echo "<td><a href='comments.php?unapprove=$comment_id'>Unapprove</a></td>";
-                                        echo "<td><a href='post_comments.php?delete=$comment_id&id=". $_GET['id'] ."'>Delete</a></td>";                                                        
+                                        echo "<td><a href='post_comments.php?approve=$comment_id&id=" .  $id . "'>Approve</a></td>";
+                                        echo "<td><a href='post_comments.php?unapprove=$comment_id&id=" .  $id . "'>Unapprove</a></td>";
+                                        echo "<td><a href='post_comments.php?delete=$comment_id&id=". $id ."'>Delete</a></td>";                                                        
                                     echo "</tr>";
                                 }     
 
@@ -103,9 +107,31 @@
 
                     <?php 
 
-                    unapprove_comment();
+                    // UNAPPROVE COMMENT
+                    if(isset($_GET['unapprove'])) {
+                        $comment_status = $_GET['unapprove'];
 
-                    approve_comment();  
+                        $query = "UPDATE comments SET comment_status = 'unapproved' WHERE comment_id = $comment_status ";
+                        $update_comment_status = mysqli_query($connection, $query);
+
+                        confirm_query($update_comment_status);
+
+                        header("Location: post_comments.php?id=" . $id ."");
+                    }    
+                
+
+                    // APPROVE COMMENT
+                    if(isset($_GET['approve'])) {
+                        $comment_status = $_GET['approve'];
+
+                        $query = "UPDATE comments SET comment_status = 'approved' WHERE comment_id = $comment_status ";
+                        $update_comment_status = mysqli_query($connection, $query);
+
+                        confirm_query($update_comment_status);
+
+                        header("Location: post_comments.php?id=" . $id ."");
+                    }      
+                
 
                     ?>
 
@@ -121,7 +147,7 @@
 
                         confirm_query($delete_comment);
 
-                        header("Location: post_comments.php?id=" . $_GET['id'] ."");
+                        header("Location: post_comments.php?id=" . $id ."");
 
                     }
 
