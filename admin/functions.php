@@ -196,7 +196,7 @@ function find_all_posts() {
             $row = mysqli_fetch_assoc($comment_query);
             $comment_id = $row['comment_id'];
             $count_comments = mysqli_num_rows($comment_query);
-            echo "<td><a href='comment.php?id=$comment_id'>$count_comments</a></td>";
+            echo "<td><a href='post_comments.php?id=$post_id'>$count_comments</a></td>";
 
             echo "<td>$post_date</td>";   
             echo "<td style='text-align: center'><a href='../post.php?p_id={$post_id}'><i class='fa fa-eye' aria-hidden='true' data-toggle='tooltip' title='View Post'></i></a></td>";  
