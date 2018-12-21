@@ -23,6 +23,7 @@
                 $post_query = mysqli_query($connection, $query);
 
                 while($row = mysqli_fetch_assoc($post_query)) {
+                    $post_id = $row['post_id'];
                     $post_title = $row['post_title'];
                     $post_author = $row['post_author'];
                     $post_content = $row['post_content'];
@@ -32,17 +33,17 @@
                 ?>    
 
 
-                <h1 class="page-header">
+<!--                 <h1 class="page-header">
                     Page Heading
                     <small>Secondary Text</small>
                 </h1>
-
+ -->
                 <!-- First Blog Post -->
                 <h2>
                     <a href="post.php?p_id=<?php echo $post_id; ?>"><?php echo $post_title; ?></a>
                 </h2>
                 <p class="lead">
-                    by <a href="index.php"><?php echo $post_author; ?></a>
+                    by <?php echo "<a href='author_posts.php?author={$post_author}&p_id={$post_id}'>{$post_author}</a>" ?>
                 </p>
                 <p><span class="glyphicon glyphicon-time"></span> Posted on <?php echo $post_date; ?></p>
                 <hr>
