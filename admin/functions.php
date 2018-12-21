@@ -1,5 +1,12 @@
 <?php
 
+
+function escape($string) {
+    global $connection;
+    return mysqli_real_escape_string($connection, trim($string));
+}
+
+
 // CHECK IF THE QUERY FAILED OR NOT
 function confirm_query($result) {
     global $connection;
@@ -216,7 +223,7 @@ function insert_categories() {
     // if the input field is empty, inform the user, else insert the value into categories table
     // and then check if the query was successful; if it wasn't, kill the script and display the error
     if(isset($_POST['submit'])) {
-        $cat_title = $_POST['cat_title'];
+        $cat_title = escape($_POST['cat_title']);
 
         if(trim($cat_title == "") || empty($cat_title)) {
             echo "This field should not be empty";
@@ -239,18 +246,18 @@ function update_categories() {
     // query the database and and select the category that has the specified id
     // then get the title of the category
     if(isset($_GET['edit'])) {
-        $cat_id = $_GET['edit'];
+        $cat_id = escape($_GET['edit']);
 
         $query = "SELECT * FROM categories WHERE cat_id='{$cat_id}' ";
         $edit_categories = mysqli_query($connection, $query);
 
         $row = mysqli_fetch_assoc($edit_categories);
-        $cat_title = $row['cat_title'];                              
+        $cat_title = escape($row['cat_title']);                              
     }
 
     // UPDATE QUERY
     if(isset($_POST['update_category'])) {
-        $the_cat_title = $_POST['cat_title'];
+        $the_cat_title = escape($_POST['cat_title']);
         $query = "UPDATE categories SET cat_title = '{$the_cat_title}' WHERE cat_id='{$cat_id}' ";
         $edit_query = mysqli_query($connection, $query);
 
@@ -287,17 +294,17 @@ function create_post() {
 
     if(isset($_POST['create_post'])) {
 
-        $post_category_id = $_POST['post_category'];
-        $post_author = $_POST['post_author']; 
-        $post_title = mysqli_real_escape_string($connection, $_POST['post_title']);                                   
-        $post_status = $_POST['post_status'];  
+        $post_category_id = escape($_POST['post_category']);
+        $post_author = escape($_POST['post_author']); 
+        $post_title = escape($_POST['post_title']);                                   
+        $post_status = escape($_POST['post_status']);  
 
-        $post_image = $_FILES['image']['name']; 
-        $post_image_temp = $_FILES['image']['tmp_name']; 
+        $post_image = escape($_FILES['image']['name']); 
+        $post_image_temp = escape($_FILES['image']['tmp_name']); 
 
-        $post_tags = $_POST['post_tags'];  
-        $post_content = mysqli_real_escape_string($connection, $_POST['post_content']);   
-        $post_date = date('d-m-y');
+        $post_tags = escape($_POST['post_tags']);  
+        $post_content = escape($_POST['post_content']);   
+        $post_date = escape(date('d-m-y'));
 
         move_uploaded_file($post_image_temp, "../images/$post_image");
 
@@ -347,7 +354,7 @@ function reset_post_views() {
     global $connection;
 
     if(isset($_GET['reset'])) {
-        $post_id = $_GET['reset'];
+        $post_id = escape($_GET['reset']);
 
         $query = "UPDATE posts SET post_views_count = 0 WHERE post_id =" . mysqli_real_escape_string($connection, $post_id) . " ";
         $reset_query = mysqli_query($connection, $query);
@@ -395,10 +402,6 @@ function display_online_users() {
 }
 
 display_online_users();
-
-
-
-
 
 
 ?>

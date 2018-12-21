@@ -1,8 +1,8 @@
 <?php
 
-    $u_id = $_GET['u_id']; // get the user id from the url
+    $u_id = escape($_GET['u_id']); // get the user id from the url
     
-    if(isset($_GET['u_id'])) {
+    if(isset(escape($_GET['u_id']))) {
         $query = "SELECT * FROM users WHERE user_id = $u_id ";
         $select_users = mysqli_query($connection, $query);
 
@@ -22,14 +22,14 @@
 
 
     // EDIT USER
-    if(isset($_POST['edit_user'])) {
+    if(isset(escape($_POST['edit_user']))) {
 
-        $username = $_POST['username']; 
-        $user_firstname = $_POST['user_firstname']; 
-        $user_lastname = $_POST['user_lastname']; 
-        $user_email = $_POST['user_email']; 
-        $user_role = $_POST['user_role']; 
-        $user_password = $_POST['user_password']; 
+        $username = escape($_POST['username']); 
+        $user_firstname = escape($_POST['user_firstname']); 
+        $user_lastname = escape($_POST['user_lastname']); 
+        $user_email = escape($_POST['user_email']); 
+        $user_role = escape($_POST['user_role']); 
+        $user_password = escape($_POST['user_password']);
 
         if(!empty($user_password)) {
             $query = "SELECT user_password FROM users WHERE user_id = $user_id";
@@ -37,7 +37,7 @@
             confirm_query($get_password);
 
             $row = mysqli_fetch_assoc($get_password);
-            $db_user_password = $row['user_password'];
+            $db_user_password = escape($row['user_password']);
 
             if($db_user_password != $user_password) {
                 $hashed_password = password_hash($user_password, PASSWORD_BCRYPT, array('cost' => 10));
