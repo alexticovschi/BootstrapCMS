@@ -127,8 +127,15 @@ if(isset($_POST['checkBoxArray'])) {
     
 $(document).ready(function() {
     $('.delete_link').on('click', function(){
-        var id = $(this).attr("rel");
-        alert(id);
+        let id = $(this).attr("rel");
+        let post_title = $(this).attr("post-title")
+        var delete_url = `posts.php?delete=${id}`;
+        
+        $('.modal-title').text(post_title);
+        
+        $('.modal_delete_link').attr("href", delete_url);
+        $('#myModal').modal('show');
+        return false;
     })
 });
 
