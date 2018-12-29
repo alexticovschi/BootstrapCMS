@@ -1,9 +1,9 @@
 <?php
-
-    $u_id = escape($_GET['u_id']); // get the user id from the url
     
-    if(isset(escape($_GET['u_id']))) {
-        $query = "SELECT * FROM users WHERE user_id = $u_id ";
+    if(isset($_GET['u_id'])) {
+        $user_id = $_GET['u_id'];
+
+        $query = "SELECT * FROM users WHERE user_id = $user_id ";
         $select_users = mysqli_query($connection, $query);
 
         confirm_query($select_users);
@@ -18,11 +18,13 @@
             $user_password = $row['user_password']; 
 
         }
-    }
+    } else {  // If the user id is not present in the URL we redirect to the home page
+        header("Location: index.php");
+    }  
 
 
     // EDIT USER
-    if(isset(escape($_POST['edit_user']))) {
+    if(isset($_POST['edit_user'])) {
 
         $username = escape($_POST['username']); 
         $user_firstname = escape($_POST['user_firstname']); 
@@ -52,7 +54,7 @@
             $query .= "user_email = '$user_email', ";
             $query .= "user_role = '$user_role', ";
             $query .= "user_password = '$hashed_password' ";
-            $query .= "WHERE user_id = $u_id ";
+            $query .= "WHERE user_id = $user_id ";
 
             $update_user = mysqli_query($connection, $query);
 
@@ -62,10 +64,7 @@
         
         }
         
-    } else {  // If the user id is not present in the URL we redirect to the home page
-        header("Location: index.php");
-    
-    }  
+    } 
 
 ?>
 
