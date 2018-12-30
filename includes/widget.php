@@ -1,4 +1,6 @@
-<div class="well">
-    <h4>Side Widget Well</h4>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
+<div class="card my-4 mb-5">
+  <h5 class="card-header">Side Widget</h5>
+  <div class="card-body">
+    You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
+  </div>
 </div>

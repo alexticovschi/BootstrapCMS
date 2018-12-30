@@ -10,7 +10,7 @@
         <div class="row">
 
             <!-- Blog Entries Column -->
-            <div class="col-md-8">
+            <div class="col-md-8 mt-5">
                 
                 <?php
 
@@ -33,27 +33,22 @@
                         $post_image = $row['post_image'];
 
                     ?>    
-
-<!-- 
-                    <h1 class="page-header">
-                        Page Heading
-                        <small>Secondary Text</small>
-                    </h1> -->
-
-                    <!-- First Blog Post -->
-                    <h2>
-                        <a href=""><?php echo $post_title; ?></a>
-                    </h2>
-                    <p class="lead">
-                        by <?php echo "<a href='author_posts.php?author={$post_author}&p_id={$post_id}'>{$post_author}</a>" ?>
-                    </p>
-                    <p><span class="glyphicon glyphicon-time"></span> Posted on <?php echo $post_date; ?></p>
-                    <hr>
-                    <img class="img-responsive" src="images/<?php echo $post_image ?>" alt="">
-                    <hr>
-                    <p><?php echo $post_content; ?></p>
-
-                    <hr>
+                    
+                    <!-- Blog Post -->
+                    <div class="card mb-4">
+                        <a href="post.php?p_id=<?php echo $post_id; ?>">
+                            <img class="card-img-top" src="images/<?php echo $post_image ?>" alt="Card image cap">
+                        </a>
+                        <div class="card-body">
+                            <h2 class="card-title">
+                                <a href="post.php?p_id=<?php echo $post_id; ?>"><?php echo $post_title; ?></a>
+                            </h2>
+                            <p class="card-text"><?php echo $post_content; ?></p>
+                        </div>
+                        <div class="card-footer text-muted">
+                            Posted by <a href="author_posts.php?author=<?php echo $post_author; ?>&p_id=<?php echo $post_id; ?>"><?php echo $post_author; ?></a> on <?php echo $post_date; ?>
+                        </div>
+                    </div>
 
                     <?php } 
 
@@ -61,16 +56,11 @@
 
                     header("Location: index.php");
 
-
                 }
-
-
-
                 ?> 
 
 
                 <!-- Blog Comments -->
-
                 <?php
 
                 if(isset($_POST['create_comment'])) {
@@ -111,32 +101,30 @@
                 ?>
 
 
-
-
                 <!-- Comments Form -->
-                <div class="well">
-                    <h4>Leave a Comment:</h4>
-                    <form id="comments_form" action="" method="post" role="form">
-                        <div class="form-group">
-                            <label for="Author">Author</label>
-                            <input class="form-control" type="text" name="comment_author">
-                        </div>
-                        <div class="form-group">
-                            <label for="Email">Email</label>
-                            <input class="form-control" type="email" name="comment_email">
-                        </div>
-                        <div class="form-group">
-                            <label for="comment">Your Comment</label>
-                            <textarea name="comment_content" class="form-control" rows="3"></textarea>
-                        </div>
-                        <button type="submit" name="create_comment" class="btn btn-primary">Submit</button>
-                    </form>
+                <div class="card my-4">
+                    <h5 class="card-header">Leave a Comment:</h5>
+                    <div class="card-body">
+                        <form id="comments_form" action="" method="post" role="form">
+                            <div class="form-group">
+                                <label for="Author">Author</label>
+                                <input class="form-control" type="text" name="comment_author">
+                            </div>
+                            <div class="form-group">
+                                <label for="Email">Email</label>
+                                <input class="form-control" type="email" name="comment_email">
+                            </div>
+                            <div class="form-group">
+                                <label for="comment">Your Comment</label>
+                                <textarea name="comment_content" class="form-control" rows="3"></textarea>
+                            </div>
+                            <button type="submit" name="create_comment" class="btn btn-submit">Submit</button>
+                        </form>
+                    </div>
                 </div>
 
-                <hr>
 
                 <!-- Posted Comments -->
-
                 <?php 
 
                 // DISPLAY COMMENTS BASED ON APPROVAL
@@ -153,19 +141,15 @@
                     $comment_content = $row['comment_content'];
                     $comment_author = $row['comment_author'];
 
-                    ?>
+                ?>
 
 
                 <!-- Comment -->
-                <div class="media">
-                    <a class="pull-left" href="#">
-                        <img class="media-object" src="http://placehold.it/64x64" alt="">
-                    </a>
+                <div class="media mb-4">
+                    <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
                     <div class="media-body">
-                        <h4 class="media-heading"><?php echo $comment_author; ?>
-                            <small><?php echo $comment_date; ?></small>
-                        </h4>
-                        <?php echo $comment_content; ?>
+                        <h5 class="mt-0"><?php echo $comment_author; ?> <span class="badge badge-light" style="font-size: 14px; color: #888"><?php echo $comment_date; ?></span></h5> 
+                        <?php echo $comment_content; ?>                    
                     </div>
                 </div>
 
@@ -180,7 +164,8 @@
         </div>
         <!-- /.row -->
 
-        <hr>
+    </div>
+    <!-- /.container -->
 
 <!-- Footer -->
 <?php include("includes/footer.php"); ?>

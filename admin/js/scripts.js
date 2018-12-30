@@ -1,15 +1,40 @@
 $(document).ready(function() {
+	
+	$('#selectAllBoxes').click(function() {
+		if(this.checked) {
+			//console.log(this.checked);
+			$('.checkBoxes').each(function() {
+				this.checked = true;
+			});
+		} else {
+			$('.checkBoxes').each(function() {
+				this.checked = false;
+			});
+		}
+	})
 
-    $(window).scroll(function(){ 
-        if ($(this).scrollTop() > 100) { 
-            $('#goToTop').fadeIn(); 
-        } else { 
-            $('#goToTop').fadeOut(); 
-        } 
-    }); 
-    $('#goToTop').click(function(){ 
-        $("html, body").animate({ scrollTop: 0 }, 600); 
-        return false; 
-    }); 
-    
+    function loadUsersOnline() {
+
+
+        $.get("functions.php?onlineusers=result", function(data){
+
+            $(".usersonline").text(data);
+
+
+        });
+
+    }
+
+
+    setInterval(function(){
+
+        loadUsersOnline();
+
+
+    },500);
+
 });
+
+
+tinymce.init({ selector:'textarea' });
+

@@ -10,7 +10,7 @@
         <div class="row">
 
             <!-- Blog Entries Column -->
-            <div class="col-md-8">
+            <div class="col-md-8 mt-5">
                 
                 <?php
 
@@ -31,6 +31,7 @@
                     } else {
 
                         while($row = mysqli_fetch_assoc($search_query)) {
+                            $post_id = $row['post_id'];
                             $post_title = $row['post_title'];
                             $post_author = $row['post_author'];
                             $post_content = $row['post_content'];
@@ -40,26 +41,22 @@
                         ?>    
 
 
-                        <h1 class="page-header">
-                            Page Heading
-                            <small>Secondary Text</small>
-                        </h1>
-
-                        <!-- First Blog Post -->
-                        <h2>
-                            <a href="#"><?php echo $post_title; ?></a>
-                        </h2>
-                        <p class="lead">
-                            by <a href="index.php"><?php echo $post_author; ?></a>
-                        </p>
-                        <p><span class="glyphicon glyphicon-time"></span> Posted on <?php echo $post_date; ?></p>
-                        <hr>
-                        <img class="img-responsive" src="images/<?php echo $post_image ?>" alt="">
-                        <hr>
-                        <p><?php echo $post_content; ?></p>
-                        <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
-
-                        <hr>
+                        <!-- Blog Post -->
+                        <div class="card mb-4 post">
+                            <a href="post.php?p_id=<?php echo $post_id; ?>">
+                                <img class="card-img-top" src="images/<?php echo $post_image ?>" alt="Card image cap">
+                            </a>
+                            <div class="card-body">
+                                <h2 class="card-title">
+                                    <a href="post.php?p_id=<?php echo $post_id; ?>"><?php echo $post_title; ?></a>
+                                </h2>
+                                <p class="card-text"><?php echo $post_content; ?></p>
+                                    <a href="post.php?p_id=<?php echo $post_id; ?>" class="btn read-more">Read More &rarr;</a>
+                            </div>
+                            <div class="card-footer text-muted">
+                                Posted by <a href="author_posts.php?author=<?php echo $post_author; ?>&p_id=<?php echo $post_id; ?>"><?php echo $post_author; ?></a> on <?php echo $post_date; ?>
+                            </div>
+                        </div>
         
 
                         <?php }  // close the loop
@@ -76,7 +73,8 @@
         </div>
         <!-- /.row -->
 
-        <hr>
+    </div>
+    <!-- /.container -->
 
 <!-- Footer -->
 <?php include("includes/footer.php"); ?>

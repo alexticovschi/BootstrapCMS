@@ -1,64 +1,48 @@
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="index.php">Blog CMS</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
                 </button>
-                <a class="navbar-brand" href="index.php">BootstrapCMS</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <?php  
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <?php  
 
-                    $query = "SELECT * FROM categories";
-                    $cat_query = mysqli_query($connection, $query);
+                        // $query = "SELECT * FROM categories";
+                        // $cat_query = mysqli_query($connection, $query);
 
-                    while($row = mysqli_fetch_assoc($cat_query)) {
-                        $cat_title = $row['cat_title'];
-                        echo "<li><a href='#'>{$cat_title}</a></li>";
-                    }
+                        // while($row = mysqli_fetch_assoc($cat_query)) {
+                        //     $cat_title = $row['cat_title'];
+                        //     echo "<li class='nav-item'><a class='nav-link' href='#'>{$cat_title}</a></li>";
+                            // }
 
 
-                    ?>
+                        ?>
 
 
-                    <li>
-                        <a href="admin/index.php">Admin</a>
-                    </li>
+                        <li class='nav-item'>
+                            <a class='nav-link' href="admin/index.php">Admin</a>
+                        </li>
 
-                    <li>
-                        <a href="registration.php">Register</a>
-                    </li>
+                        <li class='nav-item'>
+                            <a class='nav-link' href="registration.php">Register</a>
+                        </li>
 
-                    <?php 
+                        <?php 
 
-                    if(isset($_SESSION['user_role'])) {
-                        if(isset($_GET['p_id'])) {
-                            $post_id = $_GET['p_id'];
-
-                            echo "<li><a href='admin/posts.php?source=edit_post&p_id={$post_id}'>Edit Post</a></li>";
+                        if(isset($_SESSION['user_role'])) {
+                            if(isset($_GET['p_id'])) {
+                                $post_id = $_GET['p_id'];
+                                echo "<li class='nav-item'>
+                                        <a class='nav-link' href='admin/posts.php?source=edit_post&p_id={$post_id}'>Edit Post</a>
+                                    </li>";
+                            }
                         }
-
-                    }
-                    
-
-                    ?>
-
-                 <!--              
-                    <li>
-                        <a href="#">Services</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li> -->
-                </ul>
+                            
+                        ?>
+                    </ul>
+                </div>
             </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
+        </nav>
