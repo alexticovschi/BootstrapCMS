@@ -1,0 +1,177 @@
+
+body {
+  padding-top: 54px;
+}
+
+@media (min-width: 992px) {
+  body {
+    padding-top: 56px;
+  }
+}
+
+a {
+    transition: all 0.4s;
+    color: #1f97af !important;
+}
+
+a:hover {
+    color: #ffffff !important;
+}
+
+.fa-inverse:hover {
+    color: #1f97af !important;
+}
+
+
+.navbar {
+    background-color: #017991;
+}
+
+.navbar-brand {
+    color: #fff !important;
+}
+.navbar-brand:hover {
+    color: #cfeaf0 !important;
+}
+
+.navbar li > a {
+    color: #ffffff !important;
+}
+.navbar li > a:hover {
+    color: #b8ecf6 !important;
+}
+
+.card.post {
+    transition: .5s;
+}
+
+.card.post:hover {
+    box-shadow: 2px 2px 14px 3px #ccc; 
+}
+
+li.category > a {
+    color: rgb(58, 59, 59);
+}
+
+li.category > a:hover {
+    color: #0085a1 !important;
+}
+
+.btn.btn-submit {
+    background-color: #0085a1;
+    color: #fff;
+}
+
+.btn.btn-submit:hover {
+    background-color: #0f9cb8;
+}
+
+.btn.read-more {
+    border: none;
+    color: white;
+    padding: 9px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.btn.read-more {
+    background-color: white;
+    color: #0085a1;
+    border: 2px solid #0085a1;
+  }
+  
+.btn.read-more:hover {
+    background-color: #0085a1;
+    color: white;
+}
+
+.card-header {
+    background-color: #e3eff1 !important;
+}
+
+.card-title > a {
+    color: #3f4141 !important;
+    transition: .4s;
+}
+
+.card-title > a:hover {
+    text-decoration: none;
+    color: #0085a1 !important;
+}
+
+.card-footer > a {
+    color: #0085a1 !important;
+}
+
+
+#goToTop {
+    position:fixed;
+    right:10px;
+    bottom:10px;
+    cursor:pointer;
+    width:50px;
+    height:50px;
+    background-color:#0085a1;
+    text-indent:-9999px;
+    display:none;
+    -webkit-border-radius:60px;
+    -moz-border-radius:60px;
+    border-radius:60px;
+    z-index: 1000;
+}
+
+#goToTop span {
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin-left:-8px;
+    margin-top:-12px;
+    height:0;
+    width:0;
+    border:8px solid transparent;
+    border-bottom-color:#ffffff;
+}
+
+#goToTop:hover {
+    background-color:#35aac2;
+    opacity:1;filter:"alpha(opacity=100)";
+}
+
+*:focus {
+    outline: 0 !important;
+}
+
+footer {
+    padding: 60px 0 65px;
+    background-color: #b9cace;
+    align-content: flex-end;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* position: absolute; */
+}
+  
+footer .list-inline {
+    margin: 0;
+    padding: 0;
+}
+  
+footer .copyright {
+    font-size: 14px;
+    margin-bottom: 0;
+    text-align: center;
+}
+
+.fa-inverse {
+    color: rgb(255, 255, 255) !important;
+}
+
+.fa:hover {
+    background-color: #1f97af;
+}

@@ -1,69 +1,71 @@
-<?php include("includes/admin_header.php"); ?>
+<?php include("includes/header.php"); ?>
 
-    <div id="wrapper">
+    <!-- Navigation -->
+    <?php include("includes/navigation.php"); ?>
 
-        <!-- Navigation -->
-        <?php include("includes/admin_navigation.php"); ?>
 
-        <div id="page-wrapper">
+    <!-- Page Content -->
+    <div class="container">
 
-            <div class="container-fluid">
+        <div class="row">
 
-                <!-- Page Heading -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">
-                            Welcome to admin
-                            <small><?php echo $_SESSION['username']; ?></small>
-                        </h1>
-                        
-                        <div class="col-xs-6">
+            <!-- Blog Entries Column -->
+            <div class="col-md-8 mt-5">
+                
+                <?php
 
-                            <?php insert_categories(); ?>
-                            <?php update_categories(); ?>  
+                if(isset($_GET['category'])) {
+                    $post_cat_id = $_GET['category'];
+                }
 
-                            <form action="" method="post">
-                                <div class="form-group">
-                                    <label for="cat-title">Add Category</label>
-                                    <input class="form-control" type="text" name="cat_title"> 
-                                </div>
-                                <div class="form-group">
-                                    <input class="btn btn-primary" type="submit" name="submit" value="Add Category"> 
-                                </div>                              
-                            </form>
-                            
-                            <?php include_update_categories_file(); ?>
-                            
-                        </div>
+                $query = "SELECT * FROM posts WHERE post_category_id = $post_cat_id";
+                $post_query = mysqli_query($connection, $query);
 
-                        <div class="col-xs-6">
+                if(empty($count = mysqli_num_rows($post_query))) {
+                    echo "<h2 style='padding: 100px; text-align: center; border: 2px solid grey;'>No Posts from this Category</h2>";
+                }
+                while($row = mysqli_fetch_assoc($post_query)) {
+                    $post_id = $row['post_id'];
+                    $post_title = $row['post_title'];
+                    $post_author = $row['post_author'];
+                    $post_content = $row['post_content'];
+                    $post_date = $row['post_date'];
+                    $post_image = $row['post_image'];
 
-                            <table class="table table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Id</th>
-                                        <th>Category Title</th>
-                                        <th>Edit</th>
-                                        <th>Delete</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    
-                                    <?php find_all_categories(); ?>
-                                    <?php delete_categories(); ?>
+                ?>    
 
-                                </tbody>
-                            </table>
-                        </div>
-                        
+                <!-- Blog Post -->
+                <div class="card mb-4 post">
+                    <a href="post.php?p_id=<?php echo $post_id; ?>">
+                        <img class="card-img-top" src="images/<?php echo $post_image ?>" alt="Card image cap">
+                    </a>
+                    <div class="card-body">
+                        <h2 class="card-title">
+                            <a href="post.php?p_id=<?php echo $post_id; ?>"><?php echo $post_title; ?></a>
+                        </h2>
+                        <p class="card-text"><?php echo $post_content; ?></p>
+                            <a href="post.php?p_id=<?php echo $post_id; ?>" class="btn read-more">Read More &rarr;</a>
+                    </div>
+                    <div class="card-footer text-muted">
+                        Posted by <a href="author_posts.php?author=<?php echo $post_author; ?>&p_id=<?php echo $post_id; ?>"><?php echo $post_author; ?></a> on <?php echo $post_date; ?>
                     </div>
                 </div>
-                <!-- /.row -->
+    
+
+                <?php } ?> <!-- close the loop -->
 
             </div>
-            <!-- /.container-fluid -->
+
+            <!-- Blog Sidebar Widgets Column -->
+            <?php include("includes/sidebar.php"); ?>
+
 
         </div>
-        <!-- /#page-wrapper -->
+        <!-- /.row -->
 
-<?php include("includes/admin_footer.php"); ?>
+    </div>
+    <!-- /.container -->
+
+<!-- Footer -->
+<?php include("includes/footer.php"); ?>
+
