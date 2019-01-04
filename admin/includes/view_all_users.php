@@ -60,7 +60,7 @@
         if($_SESSION['user_role']) {
 
             if($_SESSION['user_role'] === 'admin') {
-                $this_user_id = mysqli_real_escape_string($_GET['delete']);
+                $this_user_id = mysqli_real_escape_string($connection, $_GET['delete']);
 
                 $query = "DELETE FROM users WHERE user_id = $this_user_id";
                 $delete_user = mysqli_query($connection, $query);
