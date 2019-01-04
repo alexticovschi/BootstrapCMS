@@ -1,5 +1,5 @@
 <?php  include "includes/header.php"; ?>
-
+<?php require('vendor/autoload.php'); ?>
 
 <?php 
 
